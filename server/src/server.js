@@ -1,5 +1,7 @@
+import 'dotenv/config';
 const express = require('express');
 import data from './database/database';
+
 
 const app = express();
 
@@ -17,6 +19,7 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
+    console.log(process.env.MY_SECRET); // an example of env variables
     console.log('App is listening on port ' + port);
 });
 
