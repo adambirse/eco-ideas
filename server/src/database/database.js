@@ -12,5 +12,5 @@ const turnTapOff = new Idea(2, 'Turn tap off when brushing your teeth', 'Home');
 
 data.push(compost, turnTapOff);
 
-module.exports = data;
+export default data;
 

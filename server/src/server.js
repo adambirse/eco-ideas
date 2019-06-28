@@ -1,6 +1,5 @@
 const express = require('express');
-const data = require('./database/database');
-// import data from './database/database';
+import data from './database/database';
 
 const app = express();
 
