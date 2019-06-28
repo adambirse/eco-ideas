@@ -1,6 +1,5 @@
 
-## Eco Ideas - Client
-
+## Eco Ideas - Server
 
 ### Deploying
 
