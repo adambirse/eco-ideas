@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import data from './model/idea/database';
 import Header from "./components/header"
 import Footer from "./components/footer"
 import NavBar from "./components/navbar"
@@ -14,7 +13,7 @@ function App() {
             <NavBar/>
             <div className="row">
                 <div className="leftcolumn">
-                    <IdeaList ideas={data}/>
+                    <IdeaList/>
                 </div>
             </div>
             <Footer/>

@@ -5,9 +5,11 @@ jobs:
       - image: circleci/node:9
     steps:
       - checkout
-      - run:
-          name: install-dependencies
-          command: npm install
-      - run:
-          name: tests
-          command: npm test
+#      - run:
+#          name: install-dependencies
+#          command: npm install
+#          working_directory: client
+#      - run:
+#          name: tests
+#          command: npm test
+#          working_directory: client
