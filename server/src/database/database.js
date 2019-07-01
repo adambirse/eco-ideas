@@ -1,16 +1,17 @@
-class Idea {
-    constructor(id, text, ...categories) {
-        this.id = id;
-        this.text = text;
-        this.categories = categories;
-    }
-}
-let data = [];
+const Sequelize = require('sequelize');
+import 'dotenv/config';
 
-const compost = new Idea(1, 'Create a compost bin', 'Home');
-const turnTapOff = new Idea(2, 'Turn tap off when brushing your teeth', 'Home');
+const port = process.env.DATABASE_PORT || 3306;
+const host = process.env.DATABASE_HOST || 'localhost';
+const databaseName = process.env.DATABASE_NAME || 'database';
+const databaseUser = process.env.DATABASE_USER || 'root';
+const databasePassword = process.env.DATABASE_PASSWORD || 'password';
 
-data.push(compost, turnTapOff);
 
-export default data;
+const sequelize = new Sequelize(databaseName, databaseUser, databasePassword, {
+    dialect: 'mysql',
+    host: host,
+    port: process.env.DATABASE_PORT
+});
 
+module.exports = sequelize;

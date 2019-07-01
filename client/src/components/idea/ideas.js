@@ -17,9 +17,9 @@ class IdeaList extends Component {
         this.getList();
     }
 
-    // Retrieves the list of items from the Express app
+    // Retrieves the list of ideas from the Express app
     getList = () => {
-        fetch('/api/getList')
+        fetch('/api/ideas')
             .then(res => res.json())
             .then(list => this.setState({list}))
     };
@@ -29,15 +29,15 @@ class IdeaList extends Component {
 
         return (
             <div className="App">
-                <h1>List of Items</h1>
+                <h1>List of Ideas</h1>
                 {/* Check to see if any items are found*/}
                 {list.length ? (
                     <div>
-                        {list.map(i => <Idea key={i.id} text={i.text} categories={i.categories}/>)}
+                        {list.map(i => <Idea key={i.id} text={i.text} category={i.category}/>)}
                     </div>
                 ) : (
                     <div>
-                        <h2>No List Items Found</h2>
+                        <h2>No Ideas Found</h2>
                     </div>
                 )
                 }
