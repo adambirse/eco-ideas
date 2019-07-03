@@ -5,7 +5,9 @@
   "main": "src/server.js",
   "scripts": {
     "test": "echo \"no tests written yet\" && exit 0",
-    "start": "nodemon --exec babel-node src/server.js"
+    "start": "nodemon --exec babel-node src/server.js",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -15,12 +17,14 @@
     "express": "^4.17.1",
     "express-validator": "^6.1.1",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.9.0"
+    "sequelize": "^5.9.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "nodemon": "^1.19.1"
-  }
+  },
+  "snyk": true
 }
