@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import IdeaForm from "../idea/ideaForm";
 
 
 class Admin extends Component {
@@ -8,9 +9,7 @@ class Admin extends Component {
         return (
             <div className="App">
                 <h1>Admin</h1>
-                <div>
-                    Some Admin stuff
-                </div>
+                <IdeaForm/>
             </div>
         );
     }

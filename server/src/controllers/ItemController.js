@@ -1,12 +1,15 @@
 import Idea from "../database/ideaDatabase";
 
-exports.add = (text, category) => {
+exports.add = (req, res) => {
+
+
     Idea.create({
-        text: text,
-        category: category
+        text: req.body.text,
+        category: req.body.category
     })
         .then(result => {
-            console.log('Created Idea');
+            console.log(`Created idea ${result}`);
+            res.json(result);
         })
         .catch(err => {
             console.log(err);

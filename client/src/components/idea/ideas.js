@@ -13,7 +13,6 @@ class IdeaList extends Component {
 
     // Fetch the list on first mount
     componentDidMount() {
-        console.log('Component did mount');
         this.getList();
     }
 
@@ -33,7 +32,7 @@ class IdeaList extends Component {
                 {/* Check to see if any items are found*/}
                 {list.length ? (
                     <div>
-                        {list.map(i => <Idea key={i.id} text={i.text} category={i.category}/>)}
+                        {list.map(i => <Idea id={i.id} text={i.text} category={i.category}/>)}
                     </div>
                 ) : (
                     <div>
