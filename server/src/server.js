@@ -1,5 +1,6 @@
 import sequelize from './database/database';
 
+var morgan = require('morgan')
 const express = require('express');
 var bodyParser = require("body-parser");
 const app = express();
@@ -11,7 +12,7 @@ const errorController = require('./controllers/errorController');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-
+app.use(morgan('combined'))
 app.use(ideaRouter);
 
 
