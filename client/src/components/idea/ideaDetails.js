@@ -8,8 +8,8 @@ class IdeaDetails extends Component {
         return (
 
             <div className='panel'>
-                <h2>{this.props.text}</h2>
-                <h5>{this.props.category}</h5>
+                <h5>Category: {this.props.category}</h5>
+                <h5>Details:</h5>
                 <p>Some more detail here, lots and lots of text that might be interesting to some people, or maybe
                     not.</p>
             </div>

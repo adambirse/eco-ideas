@@ -1,5 +1,5 @@
 const express = require('express');
-const itemController = require('../controllers/ItemController');
+const ideaController = require('../controllers/IdeaController');
 const {check, validationResult} = require('express-validator/check');
 
 
@@ -17,13 +17,13 @@ ideaRouter.post('/api/ideas/', [
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     } else {
-        itemController.add(req, res);
+        ideaController.add(req, res);
     }
 });
 
 // An api endpoint that returns a short list of items
 ideaRouter.get('/api/ideas/', (req, res) => {
-    itemController.findAll(req, res);
+    ideaController.findAll(req, res);
 });
 
 // export default ideaRouter;

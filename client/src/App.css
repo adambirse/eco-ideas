@@ -1,28 +1,38 @@
-/* Header/Blog Title */
-.header {
-  padding: 30px;
+body {
+  background-color: #ade8f0;
+}
+
+
+.header, .footer {
   text-align: center;
-  background: white;
+}
+
+
+.header {
+  padding: 20px;
+}
+
+.footer {
+  padding: 10px;
 }
 
 /* Style the top navigation bar */
 .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #a9c1c4;
 }
 
 /* Style the topnav links */
 .topnav a {
   float: left;
   display: block;
-  color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 /* Change color on hover */
-.topnav a:hover {
+.topnav a:hover   {
   background-color: #ddd;
   color: black;
 }
@@ -36,14 +46,11 @@
 .rightcolumn {
   float: left;
   width: 25%;
-  background-color: #f1f1f1;
   padding-left: 20px;
 }
 
-
 .card {
-  background-color: white;
-  padding: 20px;
+  padding: 5px;
   margin-top: 20px;
 }
 
@@ -53,18 +60,12 @@
   clear: both;
 }
 
-.footer {
-  background-color: #F1F1F1;
-  text-align: center;
-  padding: 10px;
-}
+
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: #ed8a58;
   cursor: pointer;
-  padding: 18px;
   width: 100%;
   text-align: left;
   border: none;
@@ -76,14 +77,6 @@
 .active, .accordion:hover {
   background-color: #ccc;
 }
-
-/*!* Style the accordion panel. Note: hidden by default *!*/
-/*.panel {*/
-/*  padding: 0 18px;*/
-/*  background-color: white;*/
-/*  display: none;*/
-/*  overflow: hidden;*/
-/*}*/
 
 /* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 800px) {
