@@ -1,19 +1,32 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
+import Select from 'react-select';
 import ValidationPanel from "../validation/validationPanel";
 
+const options = [
+    { value: 'Home', label: 'Home' },
+    { value: 'Work', label: 'Work' }
+];
+
 class IdeaForm extends Component {
+
 
     constructor(props) {
         super(props);
         this.state = {
             toDashboard: false,
-            validationErrors: []
+            validationErrors: [],
+            selectedOption: null,
         };
     }
 
+    handleChange = selectedOption => {
+        this.setState({ selectedOption });
+        console.log(`Option selected:`, selectedOption);
+    };
+
     handleSubmit = (e) => {
-        this.postIdea(this.text.value, this.category.value);
+        this.postIdea(this.text.value, this.state.selectedOption.value);
         e.preventDefault();
     };
 
@@ -73,14 +86,23 @@ class IdeaForm extends Component {
     }
 
     getForm() {
+
+        const { selectedOption } = this.state;
+
         return <form onSubmit={this.handleSubmit}>
             <label>
                 Text:
                 <input type="text" ref={(value) => this.text = value}/>
             </label>
+            <br/>
             <label>
                 Category:
-                <input type="text" ref={(value) => this.category = value}/>
+                {/*<input type="text" ref={(value) => this.category = value}/>*/}
+                <Select
+                    value={selectedOption}
+                    onChange={this.handleChange}
+                    options={options}
+                />
             </label>
             <input type="submit" value="Submit"/>
         </form>;

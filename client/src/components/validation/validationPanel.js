@@ -16,7 +16,7 @@ class ValidationPanel extends Component {
 
         return (
             <div>
-                {this.state.messages.map((message) => <ValidationMessage message={message}/>)}
+                {messages.map((message) => <ValidationMessage message={message}/>)}
 
             </div>
         );

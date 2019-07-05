@@ -1,11 +1,44 @@
-import React from "react";
+import React, {Component} from 'react';
+import IdeaDetails from './ideaDetails';
 
-function Idea(props) {
-    return <div className="card">
-        <h2>{props.text}</h2>
-        <h5>{props.category}</h5>
-        <p>Some more detail here, lots and lots of text that might be interesting to some people, or maybe not.</p>
-    </div>
+
+class Idea extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            active: false,
+        };
+    }
+
+
+    expand = (e) => {
+        e.preventDefault();
+        this.setState({active: !this.state.active});
+    };
+
+    render = () => {
+
+        return (
+
+            <div className='card'>
+                <button className="accordion" onClick={this.expand}>{this.props.id} - {this.props.text}</button>
+                {this.getPanel()}
+            </div>
+
+        );
+    };
+
+    getPanel = () => {
+
+        let panel;
+        if (this.state.active) {
+            panel = <IdeaDetails text={this.props.text} category={this.props.category}/>
+        }
+        return panel;
+    }
+
 }
+
 
 export default Idea;
