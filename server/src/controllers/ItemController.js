@@ -8,7 +8,6 @@ exports.add = (req, res) => {
         category: req.body.category
     })
         .then(result => {
-            console.log(`Created idea ${result}`);
             res.json(result);
         })
         .catch(err => {
