@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import IdeaDetails from './ideaDetails';
-
+import PropTypes from 'prop-types';
 
 class Idea extends Component {
 
@@ -38,7 +38,14 @@ class Idea extends Component {
         return panel;
     }
 
+
 }
+
+Idea.propTypes = {
+    id: PropTypes.number,
+    text: PropTypes.string,
+    category: PropTypes.string
+};
 
 
 export default Idea;

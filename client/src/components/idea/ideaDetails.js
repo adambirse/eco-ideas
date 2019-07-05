@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from "prop-types";
 
 
 class IdeaDetails extends Component {
@@ -16,8 +17,11 @@ class IdeaDetails extends Component {
 
         );
     }
-
 }
+
+IdeaDetails.propTypes = {
+    category: PropTypes.string
+};
 
 
 export default IdeaDetails;
