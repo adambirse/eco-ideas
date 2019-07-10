@@ -22,7 +22,7 @@ class Idea extends Component {
         return (
 
             <div className='card'>
-                <button className="accordion" onClick={this.expand}><h2>{this.props.id} - {this.props.text}</h2></button>
+                <button className="accordion" onClick={this.expand}><h2>{this.props.id} - {this.props.title}</h2></button>
                 {this.getPanel()}
             </div>
 
@@ -33,18 +33,16 @@ class Idea extends Component {
 
         let panel;
         if (this.state.active) {
-            panel = <IdeaDetails text={this.props.text} category={this.props.category}/>
+            panel = <IdeaDetails text={this.props.text}/>
         }
         return panel;
     }
-
-
 }
 
 Idea.propTypes = {
     id: PropTypes.number,
     text: PropTypes.string,
-    category: PropTypes.string
+    title: PropTypes.string
 };
 
 

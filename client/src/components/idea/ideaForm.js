@@ -1,12 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import Select from 'react-select';
 import ValidationPanel from "../validation/validationPanel";
-
-const options = [
-    { value: 'Home', label: 'Home' },
-    { value: 'Work', label: 'Work' }
-];
 
 class IdeaForm extends Component {
 
@@ -16,16 +10,16 @@ class IdeaForm extends Component {
         this.state = {
             toDashboard: false,
             validationErrors: [],
-            selectedOption: null,
+            text: '',
         };
     }
 
-    handleChange = selectedOption => {
-        this.setState({ selectedOption });
+    handleChange = e => {
+        this.setState({text: e.target.value});
     };
 
     handleSubmit = (e) => {
-        this.postIdea(this.text.value, this.state.selectedOption.value);
+        this.postIdea(this.title.value, this.state.text);
         e.preventDefault();
     };
 
@@ -45,7 +39,7 @@ class IdeaForm extends Component {
     }
 
 
-    postIdea = (text, category) => {
+    postIdea = (title, text) => {
         fetch("/api/ideas/",
             {
                 headers: {
@@ -53,11 +47,9 @@ class IdeaForm extends Component {
                     'Content-Type': 'application/json'
                 },
                 method: "POST",
-                body: JSON.stringify({text: text, category: category})
+                body: JSON.stringify({title: title, text: text})
             })
             .then((res) => {
-                console.log(res);
-
                 if (res.status === 200) {
                     this.handleSuccess();
                 } else {
@@ -86,23 +78,16 @@ class IdeaForm extends Component {
 
     getForm() {
 
-        const { selectedOption } = this.state;
 
         return <form onSubmit={this.handleSubmit}>
             <label>
-                Text:
-                <input type="text" ref={(value) => this.text = value}/>
+                Title:
             </label>
-            <br/>
+            <input type="text" ref={(value) => this.title = value} size={50}/>
             <label>
-                Category:
-                {/*<input type="text" ref={(value) => this.category = value}/>*/}
-                <Select
-                    value={selectedOption}
-                    onChange={this.handleChange}
-                    options={options}
-                />
+                Text:
             </label>
+            <textarea value={this.state.text} onChange={this.handleChange} rows={5}></textarea>
             <input type="submit" value="Submit"/>
         </form>;
     }

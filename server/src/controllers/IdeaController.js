@@ -2,10 +2,9 @@ import Idea from "../database/ideaDatabase";
 
 exports.add = (req, res) => {
 
-
     Idea.create({
-        text: req.body.text,
-        category: req.body.category
+        title: req.body.title,
+        text: req.body.text
     })
         .then(result => {
             res.json(result);

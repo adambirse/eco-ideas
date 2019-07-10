@@ -9,8 +9,8 @@ const Idea = sequelize.define('idea', {
         allowNull: false,
         primaryKey: true
     },
-    text: Sequelize.STRING,
-    category: Sequelize.STRING
+    title: Sequelize.STRING,
+    text: Sequelize.STRING
 });
 
 module.exports = Idea;

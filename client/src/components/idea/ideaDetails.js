@@ -9,18 +9,15 @@ class IdeaDetails extends Component {
         return (
 
             <div className='panel'>
-                <h5>Category: {this.props.category}</h5>
                 <h5>Details:</h5>
-                <p>Some more detail here, lots and lots of text that might be interesting to some people, or maybe
-                    not.</p>
+                <p>{this.props.text}</p>
             </div>
-
         );
     }
 }
 
 IdeaDetails.propTypes = {
-    category: PropTypes.string
+    text: PropTypes.string
 };
 
 

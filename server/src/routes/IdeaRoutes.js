@@ -5,11 +5,10 @@ const {check, validationResult} = require('express-validator/check');
 
 const ideaRouter = express.Router();
 
-let validCategories = ['Home', 'Work'];
 
 ideaRouter.post('/api/ideas/', [
+    check('title').not().isEmpty().withMessage('Title must not be empty.'),
     check('text').not().isEmpty().withMessage('Text must not be empty.'),
-    check('category').isIn(validCategories).withMessage(`Must be one of these values (${validCategories})`)
 ], (req, res) => {
 
     const errors = validationResult(req);
