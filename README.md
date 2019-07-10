@@ -9,6 +9,8 @@
 
 [Client](./client/README.md)
 
+[Acceptance tests](./acceptance_tests/README.md)
+
 Webpack, Babel on both projects.
 
 
