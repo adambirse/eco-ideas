@@ -52,6 +52,7 @@ jobs:
       - run:
           name: acceptance-tests
           command: npm run e2e
+          working_directory: acceptance_tests
 
 workflows:
   version: 2
