@@ -26,11 +26,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: build
+          name: build-client
           command: docker build -t birse/client:$CIRCLE_BRANCH .
           working_directory: client
       - run:
-          name: build
+          name: build-server
           command: docker build -t birse/server:$CIRCLE_BRANCH .
           working_directory: server
       - run:
@@ -45,6 +45,13 @@ jobs:
           name: start-server
           command: docker run --name server -e DATABASE_HOST=mysql -p 5000:5000 --link mysql -d  birse/server:$CIRCLE_BRANCH
           working_directory: server
+      - run:
+          name: install-test-dependencies
+          command: npm install
+          working_directory: acceptance_tests
+      - run:
+          name: acceptance-tests
+          command: npm run e2e
 
 workflows:
   version: 2
