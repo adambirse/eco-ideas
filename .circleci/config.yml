@@ -33,20 +33,17 @@ jobs:
           name: build
           command: docker build -t birse/server:$CIRCLE_BRANCH .
           working_directory: server
-  deploy:
-    machine: true
-    steps:
       - run:
           name: start-database
           command: docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eco -e MYSQL_USER=user -e MYSQL_PASSWORD=password -p 3310:3306 -d mysql:5.7
           working_directory: server
       - run:
+          name: start-client
+          command: docker run --name client -p 3000:3000 -d birse/client:$CIRCLE_BRANCH
+          working_directory: client
+      - run:
           name: start-server
           command: docker run --name server -e DATABASE_HOST=mysql -p 5000:5000 --link mysql -d  birse/server:$CIRCLE_BRANCH
-          working_directory: server
-      - run:
-          name: start-client
-          command: docker run --name client -p 3000:3000 -d birse/server:$CIRCLE_BRANCH
           working_directory: server
 
 workflows:
@@ -57,6 +54,3 @@ workflows:
       - build:
           requires:
             - test
-      - deploy:
-          requires:
-            - build
