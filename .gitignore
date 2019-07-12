@@ -9,6 +9,7 @@
 
 # testing
 /coverage
+/acceptance_tests/cypress/videos/**
 
 # production
 /build
