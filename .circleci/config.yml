@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9
+      - image: circleci/node:12
     steps:
       - checkout
       - run:
@@ -21,3 +21,20 @@ jobs:
           name: tests
           command: npm test
           working_directory: server
+  deploy:
+    machine: true
+    steps:
+      - checkout
+      - run:
+        name: build
+        command: docker build -t company/app:$CIRCLE_BRANCH .
+        working_directory: client
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build
