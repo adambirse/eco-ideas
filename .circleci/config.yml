@@ -26,9 +26,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: build
-        command: docker build -t company/app:$CIRCLE_BRANCH .
-        working_directory: client
+          name: build
+          command: docker build -t company/app:$CIRCLE_BRANCH .
+          working_directory: client
 
 workflows:
   version: 2
