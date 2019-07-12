@@ -8,6 +8,7 @@ import NavBar from "./components/navbar"
 import IdeaList from "./components/idea/ideas";
 import Admin from "./components/admin/admin";
 
+require('dotenv').config();
 
 function App() {
     return (

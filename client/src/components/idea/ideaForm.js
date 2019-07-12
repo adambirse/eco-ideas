@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ValidationPanel from "../validation/validationPanel";
 
+const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
+const port = process.env.REACT_APP_SERVER_PORT || 5000;
+const serverUrl = `http://${server}:${port}`;
+
 class IdeaForm extends Component {
 
 
@@ -40,7 +44,7 @@ class IdeaForm extends Component {
 
 
     postIdea = (title, text) => {
-        fetch("/api/ideas/",
+        fetch(serverUrl + "/api/ideas/",
             {
                 headers: {
                     'Accept': 'application/json',

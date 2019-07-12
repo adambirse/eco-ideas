@@ -2,7 +2,6 @@ const express = require('express');
 const ideaController = require('../controllers/IdeaController');
 const {check, validationResult} = require('express-validator/check');
 
-
 const ideaRouter = express.Router();
 
 
@@ -12,7 +11,6 @@ ideaRouter.post('/api/ideas/', [
 ], (req, res) => {
 
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     } else {

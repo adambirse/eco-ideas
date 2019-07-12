@@ -19,6 +19,14 @@ Start node server:
 
 `npm run start`
 
+#### Docker
+
+
+    
+`docker build -t server .`
+
+`docker run --name server -e DATABASE_HOST=mysql -p 5000:5000 --link mysql -d  server`
+
 
 ### API 
 
