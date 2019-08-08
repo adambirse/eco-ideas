@@ -32,6 +32,36 @@ variable network {
   description = "private network to use"
 }
 
+variable database_version {
+  type = "string"
+  default = "MYSQL_5_7"
+}
+
+variable database_tier {
+  type = "string"
+  default = "db-f1-micro"
+}
+
+variable database_name {
+  type = "string"
+  default = "eco"
+}
+
+variable database_charset {
+  type = "string"
+  default = "utf8"
+}
+
+variable database_user {
+  type = "string"
+  default = "test"
+}
+
+variable database_password {
+  type = "string"
+  default = "test"
+}
+
 // GCP Outputs
 output "gcp_cluster_endpoint" {
   value = google_container_cluster.gcp_kubernetes.endpoint
