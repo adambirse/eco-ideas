@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eco-ideas
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eco-ideas
+  template:
+    metadata:
+      labels:
+        app: eco-ideas
+    spec:
+      containers:
+        - name: eco-ideas
+          image: gcr.io/eco-ideas/client:latest
+          env:
+            - name: REACT_APP_SERVER_HOST
+              value: "IP ADDRESS"
+            - name: REACT_APP_SERVER_PORT
+              value: "5000"
+          ports:
+            - containerPort: 3000

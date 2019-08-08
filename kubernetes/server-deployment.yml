@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eco-ideas-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: eco-ideas-server
+  template:
+    metadata:
+      labels:
+        app: eco-ideas-server
+    spec:
+      containers:
+        - name: eco-ideas-server
+          image: gcr.io/eco-ideas/server:latest
+          env:
+            - name: DATABASE_HOST
+              value: "DATABASE IP"
+            - name: DATABASE_USER
+              value: "test"
+            - name: DATABASE_PASSWORD
+              value: "test"
+            - name: DATABASE_NAME
+              value: "eco"
+            - name: DATABASE_PORT
+              value: "3306"
+            - name: TEST
+              value: "test"
+          ports:
+            - containerPort: 5000

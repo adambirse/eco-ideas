@@ -13,14 +13,11 @@ Start docker mysql database (subsequent times):
 
 `docker start mysql`
 
-
-
 Start node server:
 
 `npm run start`
 
-#### Docker
-
+#### Local Docker
 
     
 `docker build -t server .`
@@ -28,9 +25,14 @@ Start node server:
 `docker run --name server -e DATABASE_HOST=mysql -p 5000:5000 --link mysql -d  server`
 
 
-### API 
+#### build for GCP 
 
-http://localhost:5000/api/ideas/test-data -> for creating of hard coded test data.  Temporary endpoint.
+- `docker build -t server .`
+- `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
+- `docker tag server  gcr.io/eco-ideas/server`
+- `gcloud docker -- push gcr.io/eco-ideas/server`
+
+### API 
 
 http://localhost:5000/api/ideas -> find all data (called by client app.)
 
