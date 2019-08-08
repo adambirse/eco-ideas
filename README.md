@@ -18,20 +18,19 @@ Webpack, Babel on both projects.
 #### Initialisation 
 - Install Gcloud and Terraform
 - Create your project on Gcloud (TODO automate)
-- Download service account credentials
-` 
+- Download service account credentials and save as per service account variable in `terraform.tfvars`
 
 #### Create Environment
 
-- `terraform init -var 'service_account=path/to/service-account.json'`
-- `terraform plan -var 'service_account=path/to/service-account.json'`
-- `tetrraform apply -var 'service_account=path/to/service-account.json'`
+- `terraform init`
+- `terraform plan`
+- `tetrraform apply`
 
 #### Teardown environment
 
 Do this to save money!
 
-`terraform destroy -var 'service_account=path/to/service-account.json'`
+`terraform destroy`
 
 ### Kubernetes
 
