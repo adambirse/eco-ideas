@@ -22,17 +22,27 @@ spec:
           image: gcr.io/eco-ideas/server:latest
           env:
             - name: DATABASE_HOST
-              value: "DATABASE IP"
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: database_host
             - name: DATABASE_USER
-              value: "test"
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: user
             - name: DATABASE_PASSWORD
-              value: "test"
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: password
             - name: DATABASE_NAME
-              value: "eco"
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: database_name
             - name: DATABASE_PORT
               value: "3306"
-            - name: TEST
-              value: "test"
           ports:
             - containerPort: 5000
           readinessProbe:
