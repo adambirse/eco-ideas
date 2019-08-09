@@ -4,7 +4,7 @@ metadata:
   name: frontend
 spec:
   selector:
-    app: eco-ideas
+    app: eco-ideas-client
   ports:
     - protocol: "TCP"
       port: 3000
