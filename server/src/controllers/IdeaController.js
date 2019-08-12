@@ -1,8 +1,8 @@
-import Idea from "../database/ideaDatabase";
+const db = require("../models");
 
 exports.add = (req, res) => {
 
-    Idea.create({
+    db.idea.create({
         title: req.body.title,
         text: req.body.text
     })
@@ -15,8 +15,11 @@ exports.add = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    Idea.findAll().then(ideas => res.json(ideas)).catch(err => {
+    db.idea.findAll().then(ideas => {
+        res.json(ideas);
+    }).catch(err => {
         console.log(err);
     });
 };
+
 

@@ -18,11 +18,9 @@ ideaRouter.post('/api/ideas/', [
     }
 });
 
-// An api endpoint that returns a short list of items
 ideaRouter.get('/api/ideas/', (req, res) => {
     ideaController.findAll(req, res);
 });
 
-// export default ideaRouter;
 
 module.exports = ideaRouter;
