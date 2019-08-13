@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"no tests written yet\" && exit 0",
+    "test": "mocha ./tests --recursive --require @babel/register",
     "start": "nodemon --exec babel-node src/server.js"
   },
   "author": "",
@@ -22,6 +22,13 @@
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "nodemon": "^1.19.1"
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^6.2.0",
+    "nodemon": "^1.19.1",
+    "proxyquire": "^2.1.2",
+    "sequelize-test-helpers": "^1.1.2",
+    "sinon": "^7.4.1",
+    "sinon-chai": "^3.3.0"
   }
 }

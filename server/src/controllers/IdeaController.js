@@ -1,8 +1,8 @@
-const db = require("../models");
+const {Idea} = require("../models");
 
 exports.add = (req, res) => {
 
-    db.idea.create({
+    Idea.create({
         title: req.body.title,
         text: req.body.text
     })
@@ -14,12 +14,18 @@ exports.add = (req, res) => {
         });
 };
 
-exports.findAll = (req, res) => {
-    db.idea.findAll().then(ideas => {
-        res.json(ideas);
+exports.findAll =  (req, res) => {
+
+    let result;
+    Idea.findAll().then(ideas => {
+        result = ideas;
+        return res.json(ideas);
     }).catch(err => {
         console.log(err);
     });
+    // res.json(result); -- works for the test but breaks code
 };
+
+
 
 
