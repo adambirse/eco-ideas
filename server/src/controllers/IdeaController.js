@@ -15,15 +15,11 @@ exports.add = (req, res) => {
 };
 
 exports.findAll =  (req, res) => {
-
-    let result;
     Idea.findAll().then(ideas => {
-        result = ideas;
         return res.json(ideas);
     }).catch(err => {
-        console.log(err);
+        console.log("err");
     });
-    // res.json(result); -- works for the test but breaks code
 };
 
 
