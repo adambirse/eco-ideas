@@ -13,7 +13,7 @@ require('dotenv').config();
 
 function App() {
     return (
-        <div className="HolyGrail">
+        <div className="Site">
             <Header/>
             <div className="HolyGrail-body">
                 <div className="HolyGrail-content">

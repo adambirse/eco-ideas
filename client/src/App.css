@@ -1,119 +1,126 @@
-.HolyGrail,
-.HolyGrail-body {
+.Site {
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
 }
 
+.HolyGrail,
+.HolyGrail-body {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .HolyGrail-nav {
-  order: -1;
+    order: -1;
 }
 
 @media (min-width: 768px) {
-  .HolyGrail-body {
-    flex-direction: row;
-    flex: 1;
-  }
-  .HolyGrail-content {
-    flex: 1;
-  }
-  .HolyGrail-nav, .HolyGrail-ads {
-    /* 12em is the width of the columns */
-    flex: 0 0 12em;
-  }
+    .HolyGrail-body {
+        flex-direction: row;
+        flex: 1;
+    }
+
+    .HolyGrail-content {
+        flex: 1;
+    }
+
+    .HolyGrail-nav, .HolyGrail-ads {
+        /* 12em is the width of the columns */
+        flex: 0 0 12em;
+    }
 }
 
 input[type=text], select {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
-textarea
-{
-  width:100%;
-  margin:5px 0;
-  padding:3px;
+textarea {
+    width: 100%;
+    margin: 5px 0;
+    padding: 3px;
 }
 
 input[type=submit] {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 input[type=submit]:hover {
-  background-color: #45a049;
+    background-color: #45a049;
 }
 
 .header, .footer {
-  text-align: center;
+    text-align: center;
 }
 
 
 .header {
-  padding: 20px;
+    padding: 20px;
 }
 
 .footer {
-  padding: 10px;
+    padding: 10px;
 }
 
 
 /* Style the top navigation bar */
 .topnav {
-  overflow: hidden;
-  background-color: #a9c1c4;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #a9c1c4;
 }
 
 /* Style the topnav links */
 .topnav a {
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    display: block;
+    width: 60px;
 }
 
 /* Change color on hover */
-.topnav a:hover   {
-  background-color: #ddd;
-  color: black;
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
 .card {
-  padding: 5px;
-  margin-top: 20px;
+    padding: 5px;
+    margin-top: 20px;
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-  background-color: #ed8a58;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  border: none;
-  outline: none;
-  transition: 0.4s;
+    background-color: #ed8a58;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .accordion:hover {
-  background-color: #ccc;
+    background-color: #ccc;
 }
 
 /* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
 @media screen and (max-width: 400px) {
-  .topnav a {
-    float: none;
-    width: 100%;
-  }
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
 }
