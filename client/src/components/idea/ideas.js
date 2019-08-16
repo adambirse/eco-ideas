@@ -30,7 +30,7 @@ class IdeaList extends Component {
         const {list} = this.state;
 
         return (
-            <div className="App">
+            <div>
                 <h1>List of Ideas</h1>
                 {list.length ? (
                     <div>
