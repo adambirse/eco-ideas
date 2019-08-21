@@ -37,7 +37,6 @@ Do this to save money!
 - `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
 - `kubectl config current-context`
 - `kubectl apply -f kubernetes/server-service.yml `
-- Add private sql ip address to server deployment
 - `kubectl apply -f kubernetes/server-deployment.yml`
 - `watch kubectl get svc` to get ip server ip address, add to client-deployment
 - `kubectl apply -f kubernetes/client-service.yml`
