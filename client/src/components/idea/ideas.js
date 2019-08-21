@@ -31,7 +31,7 @@ class IdeaList extends Component {
 
         return (
             <div>
-                <h1>List of Ideas</h1>
+                <h2>List of Ideas</h2>
                 {list.length ? (
                     <div>
                         {list.map(i => <Idea key={i.id} id={i.id} title={i.title} text={i.text}/>)}

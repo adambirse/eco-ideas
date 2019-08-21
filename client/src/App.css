@@ -1,7 +1,13 @@
+body {
+    background-color: #BCEEB7;
+}
 .Site {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    font-family: "Times New Roman", Times, serif;
+    padding: 10px;
+
 }
 
 .HolyGrail,
@@ -9,7 +15,6 @@
     display: flex;
     flex-direction: column;
 }
-
 
 .HolyGrail-nav {
     order: -1;
@@ -23,11 +28,18 @@
 
     .HolyGrail-content {
         flex: 1;
+        padding: 15px;
+
     }
 
-    .HolyGrail-nav, .HolyGrail-ads {
+     .HolyGrail-ads {
         /* 12em is the width of the columns */
-        flex: 0 0 12em;
+        flex: 0 0 15em;
+    }
+
+    .HolyGrail-nav {
+        /* 12em is the width of the columns */
+        flex: 0 0 6em;
     }
 }
 
@@ -77,33 +89,32 @@ input[type=submit]:hover {
 
 
 /* Style the top navigation bar */
-.topnav {
+.nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: #a9c1c4;
 }
 
-/* Style the topnav links */
-.topnav a {
+/* Style the nav links */
+.nav a {
     display: block;
     width: 60px;
 }
 
 /* Change color on hover */
-.topnav a:hover {
-    background-color: #ddd;
+.nav a:hover {
+    background-color: #D9C5E1;
     color: black;
 }
 
 .card {
     padding: 5px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-    background-color: #ed8a58;
+    background-color: #D9C5E1;
     cursor: pointer;
     width: 100%;
     text-align: left;
@@ -112,15 +123,10 @@ input[type=submit]:hover {
     transition: 0.4s;
 }
 
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-    background-color: #ccc;
+h1 {
+    font-size: 45px;
 }
 
-/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
-@media screen and (max-width: 400px) {
-    .topnav a {
-        float: none;
-        width: 100%;
-    }
+.active, .accordion:hover {
+    background-color: #ccc;
 }

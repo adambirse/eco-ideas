@@ -22,7 +22,7 @@ class Idea extends Component {
         return (
 
             <div className='card'>
-                <button className="accordion" onClick={this.expand}><h2>{this.props.id} - {this.props.title}</h2></button>
+                <button className="accordion" onClick={this.expand}><h3>{this.props.title}</h3></button>
                 {this.getPanel()}
             </div>
 

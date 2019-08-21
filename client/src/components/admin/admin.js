@@ -8,7 +8,7 @@ class Admin extends Component {
 
         return (
             <div className="App">
-                <h1>Admin</h1>
+                <h3>Admin</h3>
                 <IdeaForm/>
             </div>
         );
