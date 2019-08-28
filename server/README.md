@@ -19,18 +19,13 @@ Start node server:
 
 #### Local Docker
 
-    
-`docker build -t server .`
-
-`docker run --name server -e DATABASE_HOST=mysql -p 5000:5000 --link mysql -d  server`
-
+- `./build-for-local.sh`
+- `./deploy-for-local.sh`
 
 #### build for GCP 
 
-- `docker build -t server .`
-- `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
-- `docker tag server  gcr.io/eco-ideas/server`
-- `gcloud docker -- push gcr.io/eco-ideas/server`
+- `./build-for-gcp.sh`
+- `./deploy-for-gcp.sh`
 
 ### API 
 
