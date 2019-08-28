@@ -25,6 +25,10 @@ Webpack, Babel on both projects.
 - `terraform init`
 - `terraform plan`
 - `tetrraform apply`
+- `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas` (WORKAROUND TO GET SECRETS INJECTED - FIX PROPERLY)
+- `kubectl config current-context`
+- `tetrraform apply`
+
 
 #### Teardown environment
 
@@ -35,14 +39,13 @@ Do this to save money!
 ### Kubernetes
 
 - `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
-- `kubectl config current-context`
-- `kubectl apply -f kubernetes/server-service.yml `
-- `kubectl apply -f kubernetes/server-deployment.yml`
-- `watch kubectl get svc` to get ip server ip address, add to client-deployment
-- `kubectl apply -f kubernetes/client-service.yml`
-- `kubectl apply -f kubernetes/client-deployment.yml`
-- `watch kubectl get svc` to get ip client ip address
-- http://CLIENT-IP:3000
+- `./server/build-for-gcp.sh`
+- `./server/deploy-for-gcp.sh`
+- `watch kubectl get svc` to get ip server ip address, 
+- `./client/build-for-gcp.sh <SERVER_IP_ADDRESS>`
+- `./client/deploy-for-gcp.sh`
+- `watch kubectl get svc` to get the client ip address
+- http://CLIENT-IP
 
 
 

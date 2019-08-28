@@ -20,23 +20,18 @@ spec:
       containers:
         - name: eco-ideas-client
           image: gcr.io/eco-ideas/client:latest
-          env:
-            - name: REACT_APP_SERVER_HOST
-              value: "IP ADDRESS"
-            - name: REACT_APP_SERVER_PORT
-              value: "5000"
           ports:
-            - containerPort: 3000
+            - containerPort: 80
           readinessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 80
             initialDelaySeconds: 10
             periodSeconds: 8
             successThreshold: 3
           livenessProbe:
             httpGet:
               path: /
-              port: 3000
+              port: 80
             initialDelaySeconds: 10
             periodSeconds: 3
