@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Idea from "./idea";
+import Filter from "../filter/filter";
 
 const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
@@ -10,31 +11,50 @@ class IdeaList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: []
+            list: [],
+            filteredList: []
         }
     }
 
-    // Fetch the list on first mount
     componentDidMount() {
         this.getList();
     }
+
+    updateResults = (filter) => {
+        const filteredResults = this.state.list.filter((i) => {
+            return i.title.includes(filter);
+        });
+        this.setState({
+            filteredList: filteredResults
+        });
+    };
+
+    handleReset = () => {
+        this.setState({
+            filteredList: this.state.list
+        })
+    };
 
     // Retrieves the list of ideas from the Express app
     getList = () => {
         fetch(serverUrl + '/api/ideas')
             .then(res => res.json())
-            .then(list => this.setState({list}))
+            .then(list => this.setState({
+                list: list,
+                filteredList: list
+            }))
     };
 
     render() {
-        const {list} = this.state;
+        const {filteredList} = this.state;
 
         return (
             <div>
                 <h2>List of Ideas</h2>
-                {list.length ? (
+                <Filter handleSearch={this.updateResults} handleReset={this.handleReset}/>
+                {filteredList.length ? (
                     <div>
-                        {list.map(i => <Idea key={i.id} id={i.id} title={i.title} text={i.text}/>)}
+                        {filteredList.map(i => <Idea key={i.id} id={i.id} title={i.title} text={i.text}/>)}
                     </div>
                 ) : (
                     <div>

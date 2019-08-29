@@ -1,6 +1,7 @@
 body {
     background-color: #BCEEB7;
 }
+
 .Site {
     display: flex;
     min-height: 100vh;
@@ -32,18 +33,18 @@ body {
 
     }
 
-     .HolyGrail-ads {
-        /* 12em is the width of the columns */
+    .HolyGrail-ads {
+        /* 15em is the width of the columns */
         flex: 0 0 15em;
     }
 
     .HolyGrail-nav {
-        /* 12em is the width of the columns */
+        /* 6em is the width of the columns */
         flex: 0 0 6em;
     }
 }
 
-input[type=text], select {
+.text, select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -59,7 +60,7 @@ textarea {
     padding: 3px;
 }
 
-input[type=submit] {
+.submit {
     width: 100%;
     background-color: #4CAF50;
     color: white;
@@ -68,6 +69,16 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+.third-width {
+    width: 33%;
+    margin: 8px 8px;
+}
+
+.tenth-width {
+    width: 10%;
+    margin: 8px 8px;
 }
 
 input[type=submit]:hover {

@@ -87,12 +87,12 @@ class IdeaForm extends Component {
             <label>
                 Title:
             </label>
-            <input type="text" ref={(value) => this.title = value} size={50}/>
+            <input type="text" ref={(value) => this.title = value} size={50} className={"text"}/>
             <label>
                 Text:
             </label>
             <textarea value={this.state.text} onChange={this.handleChange} rows={5}></textarea>
-            <input type="submit" value="Submit"/>
+            <input type="submit" value="Submit" className={"submit"}/>
         </form>;
     }
 
