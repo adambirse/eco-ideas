@@ -2,6 +2,8 @@ const express = require('express');
 const ideaController = require('../controllers/IdeaController');
 const {check, validationResult} = require('express-validator/check');
 
+const withAuth = require('../middleware/middleware');
+
 const ideaRouter = express.Router();
 
 
@@ -20,6 +22,10 @@ ideaRouter.post('/api/ideas/', [
 
 ideaRouter.get('/api/ideas/', (req, res) => {
     ideaController.findAll(req, res);
+});
+
+ideaRouter.get('/checkToken', withAuth, function(req, res) {
+    res.status(200).send("You have the token");
 });
 
 
