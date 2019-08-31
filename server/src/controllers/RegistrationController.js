@@ -16,7 +16,7 @@ exports.register = (req, res) => {
                 password: password
             })
                 .then(result => {
-                    sres.status(200).send("successfully registered");
+                    res.status(200).send("successfully registered");
                 })
                 .catch(err => {
                     console.log(err);
