@@ -43,6 +43,11 @@ spec:
                   key: database_name
             - name: DATABASE_PORT
               value: "3306"
+            - name: SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: config
+                  key: secret
           ports:
             - containerPort: 5000
           readinessProbe:

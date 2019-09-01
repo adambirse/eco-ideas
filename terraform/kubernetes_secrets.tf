@@ -1,3 +1,7 @@
+resource "random_id" "secret" {
+  byte_length = 10
+}
+
 resource "kubernetes_secret" "config" {
   metadata {
     name = "config"
@@ -8,6 +12,7 @@ resource "kubernetes_secret" "config" {
     password = google_sql_user.app-user.password
     database_host = google_sql_database_instance.eco-ideas.private_ip_address
     database_name = google_sql_database.database.name
+    secret = random_id.secret.hex
   }
 
   type = "kubernetes.io/basic-auth"
