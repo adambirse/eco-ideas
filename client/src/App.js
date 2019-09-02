@@ -8,6 +8,7 @@ import NavBar from "./components/navbar"
 import IdeaList from "./components/idea/ideas";
 import Admin from "./components/admin/admin";
 import About from "./components/about/about";
+import LoginForm from "./components/user/login";
 
 require('dotenv').config();
 
@@ -21,7 +22,9 @@ function App() {
                     <Switch>
                         <Route exact path='/' component={IdeaList}/>
                         <Route path='/admin' component={Admin}/>
+                        <Route path='/login' component={LoginForm}/>
                         <Route path='/' component={IdeaList}/>
+
                     </Switch>
                 </div>
                 <div className="HolyGrail-nav">

@@ -7,7 +7,7 @@ const withAuth = require('../middleware/middleware');
 const ideaRouter = express.Router();
 
 
-ideaRouter.post('/api/ideas/', [
+ideaRouter.post('/api/ideas/', withAuth, [
     check('title').not().isEmpty().withMessage('Title must not be empty.'),
     check('text').not().isEmpty().withMessage('Text must not be empty.'),
 ], (req, res) => {
@@ -20,7 +20,7 @@ ideaRouter.post('/api/ideas/', [
     }
 });
 
-ideaRouter.get('/api/ideas/', (req, res) => {
+ideaRouter.get('/api/ideas/',  (req, res) => {
     ideaController.findAll(req, res);
 });
 

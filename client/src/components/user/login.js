@@ -6,25 +6,31 @@ const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
 const serverUrl = `http://${server}:${port}`;
 
-class IdeaForm extends Component {
-
+class LoginForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            email_address: '',
+            password: '',
             toDashboard: false,
             validationErrors: [],
-            text: '',
         };
     }
 
-    handleChange = e => {
-        this.setState({text: e.target.value});
+    handleEmailChange = e => {
+        this.setState({email_address: e.target.value});
+    };
+
+    handlePasswordChange = e => {
+        this.setState({password: e.target.value});
     };
 
     handleSubmit = (e) => {
-        this.postIdea(this.title.value, this.state.text);
         e.preventDefault();
+        console.log(this.state.email_address);
+        console.log(this.state.password);
+        this.login(this.state.email_address, this.state.password);
     };
 
     handleSuccess() {
@@ -42,9 +48,8 @@ class IdeaForm extends Component {
         })
     }
 
-
-    postIdea = (title, text) => {
-        fetch(serverUrl + "/api/ideas/",
+    login = (email_address, password) => {
+        fetch(serverUrl + "/api/authenticate/",
             {
                 headers: {
                     'Accept': 'application/json',
@@ -52,7 +57,7 @@ class IdeaForm extends Component {
                 },
                 method: "POST",
                 credentials: 'include',
-                body: JSON.stringify({title: title, text: text})
+                body: JSON.stringify({email_address: email_address, password: password})
             })
             .then((res) => {
                 if (res.status === 200) {
@@ -66,9 +71,7 @@ class IdeaForm extends Component {
             })
     };
 
-
     render() {
-
         if (this.state.toDashboard === true) {
             return <Redirect to='/'/>
         }
@@ -82,17 +85,15 @@ class IdeaForm extends Component {
     }
 
     getForm() {
-
-
         return <form onSubmit={this.handleSubmit}>
             <label>
-                Title:
+                Email:
             </label>
-            <input type="text" ref={(value) => this.title = value} size={50} className={"text"}/>
+            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange} className={"text"}></input>
             <label>
-                Text:
+                Password:
             </label>
-            <textarea value={this.state.text} onChange={this.handleChange} rows={5}></textarea>
+            <input type="password" value={this.state.password} onChange={this.handlePasswordChange} className={"text"}></input>
             <input type="submit" value="Submit" className={"submit"}/>
         </form>;
     }
@@ -106,4 +107,4 @@ class IdeaForm extends Component {
     }
 }
 
-export default IdeaForm;
+export default LoginForm;
