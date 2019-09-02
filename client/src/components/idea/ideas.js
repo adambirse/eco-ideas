@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Idea from "./idea";
 import Filter from "../filter/filter";
 
+const axios = require('axios');
+
 const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
 const serverUrl = `http://${server}:${port}`;
@@ -37,12 +39,15 @@ class IdeaList extends Component {
 
     // Retrieves the list of ideas from the Express app
     getList = () => {
-        fetch(serverUrl + '/api/ideas')
-            .then(res => res.json())
+        axios.get(serverUrl + '/api/ideas')
+            .then(res => res.data)
             .then(list => this.setState({
-                list: list,
-                filteredList: list
-            }))
+            list: list,
+            filteredList: list
+        }))
+            .catch(function (error) {
+                console.log(error);
+            });
     };
 
     render() {

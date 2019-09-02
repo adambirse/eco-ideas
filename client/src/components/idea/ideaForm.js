@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ValidationPanel from "../validation/validationPanel";
 
+const axios = require('axios');
+
 const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
 const serverUrl = `http://${server}:${port}`;
@@ -33,38 +35,29 @@ class IdeaForm extends Component {
         }));
     }
 
-    handleServerError(res) {
-
-        res.json().then((body) => {
-            this.setState(() => ({
-                validationErrors: body.errors,
-            }));
-        })
+    handleServerError(data) {
+        this.setState(() => ({
+            validationErrors: data.errors,
+        }));
     }
 
-
     postIdea = (title, text) => {
-        fetch(serverUrl + "/api/ideas/",
+        axios.post(serverUrl + "/api/ideas/",
             {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                body: JSON.stringify({title: title, text: text})
+                title: title,
+                text: text
             })
             .then((res) => {
-                if (res.status === 200) {
                     this.handleSuccess();
+            })
+            .catch((error) => {
+                if (error.response.status === 422) {
+                    this.handleServerError(error.response.data);
                 } else {
-                    this.handleServerError(res);
+                    console.log(error);
                 }
             })
-            .catch((res) => {
-                console.log(res)
-            })
     };
-
 
     render() {
 
@@ -81,7 +74,6 @@ class IdeaForm extends Component {
     }
 
     getForm() {
-
 
         return <form onSubmit={this.handleSubmit}>
             <label>
