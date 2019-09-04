@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ValidationPanel from "../validation/validationPanel";
+import ErrorMessage from "../error/ErrorMessage";
 
 const axios = require('axios');
 
@@ -17,6 +18,7 @@ class IdeaForm extends Component {
             toDashboard: false,
             validationErrors: [],
             text: '',
+            error: '',
         };
     }
 
@@ -35,16 +37,17 @@ class IdeaForm extends Component {
         }));
     }
 
-    handleServerError(res) {
-        if (res.status === 422) {
+    handleServerError(response) {
+        if (response.status === 422) {
             this.setState(() => ({
-                validationErrors: res.data.errors,
+                validationErrors: response.data.errors,
             }));
-        } else if (res.status === 401) {
-            //TODO add handling
-            console.log("unauthorisee");
+        } else if (response.status === 401) {
+            this.setState(() => ({
+                error: response.data
+            }));
         } else {
-            console.log(res);
+            console.log(response);
         }
 
     }
@@ -74,13 +77,13 @@ class IdeaForm extends Component {
         return (
             <div>
                 {this.optionalValidation()}
+                {this.errorPanel()}
                 {this.getForm()}
             </div>
         );
     }
 
     getForm() {
-
         return <form onSubmit={this.handleSubmit}>
             <label>
                 Title:
@@ -89,7 +92,7 @@ class IdeaForm extends Component {
             <label>
                 Text:
             </label>
-            <textarea value={this.state.text} onChange={this.handleChange} rows={5}></textarea>
+            <textarea value={this.state.text} onChange={this.handleChange} rows={5}/>
             <input type="submit" value="Submit" className={"submit"}/>
         </form>;
     }
@@ -100,6 +103,14 @@ class IdeaForm extends Component {
             validation = <ValidationPanel messages={this.state.validationErrors}/>
         }
         return validation;
+    }
+
+    errorPanel() {
+        let error;
+        if (this.state.error !== "") {
+            error = <ErrorMessage error={this.state.error}/>
+        }
+        return error;
     }
 }
 

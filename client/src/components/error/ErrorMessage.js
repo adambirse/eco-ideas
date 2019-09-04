@@ -2,7 +2,7 @@ import React from "react";
 
 function ErrorMessage(props) {
     return <div className={"alert"}>
-        <p>{props.error} </p>
+        <p>{props.error}</p>
     </div>
 }
 
