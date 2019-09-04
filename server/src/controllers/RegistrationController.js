@@ -9,7 +9,7 @@ exports.register = (req, res) => {
         where: {email_address: email_address}
     }).then(user => {
         if (user) {
-            res.status(500).send("ERROR ");
+            res.status(500).send("ERROR");
         } else {
             User.create({
                 email_address: email_address,
