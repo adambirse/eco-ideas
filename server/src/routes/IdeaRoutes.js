@@ -24,9 +24,4 @@ ideaRouter.get('/api/ideas/',  (req, res) => {
     ideaController.findAll(req, res);
 });
 
-ideaRouter.get('/checkToken', withAuth, function(req, res) {
-    res.status(200).send("You have the token");
-});
-
-
 module.exports = ideaRouter;

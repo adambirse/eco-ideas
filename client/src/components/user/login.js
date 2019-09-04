@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import ValidationPanel from "../validation/validationPanel";
+import ErrorMessage from "../error/ErrorMessage";
 
 const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
 const serverUrl = `http://${server}:${port}`;
+const axios = require('axios');
 
 class LoginForm extends Component {
 
@@ -14,7 +15,7 @@ class LoginForm extends Component {
             email_address: '',
             password: '',
             toDashboard: false,
-            validationErrors: [],
+            error: '',
         };
     }
 
@@ -28,8 +29,6 @@ class LoginForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state.email_address);
-        console.log(this.state.password);
         this.login(this.state.email_address, this.state.password);
     };
 
@@ -39,35 +38,25 @@ class LoginForm extends Component {
         }));
     }
 
-    handleServerError(res) {
-
-        res.json().then((body) => {
-            this.setState(() => ({
-                validationErrors: body.errors,
-            }));
-        })
+    handleServerError(response) {
+        this.setState(() => ({
+            error: response.data.error
+        }));
     }
 
     login = (email_address, password) => {
-        fetch(serverUrl + "/api/authenticate/",
+        axios.post(serverUrl + "/api/authenticate/",
             {
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                method: "POST",
-                credentials: 'include',
-                body: JSON.stringify({email_address: email_address, password: password})
+                email_address: email_address,
+                password: password
+            }, {
+                withCredentials: true
             })
             .then((res) => {
-                if (res.status === 200) {
-                    this.handleSuccess();
-                } else {
-                    this.handleServerError(res);
-                }
+                this.handleSuccess();
             })
-            .catch((res) => {
-                console.log(res)
+            .catch((error) => {
+                this.handleServerError(error.response);
             })
     };
 
@@ -78,7 +67,7 @@ class LoginForm extends Component {
 
         return (
             <div>
-                {this.optionalValidation()}
+                {this.errorPanel()}
                 {this.getForm()}
             </div>
         );
@@ -89,21 +78,23 @@ class LoginForm extends Component {
             <label>
                 Email:
             </label>
-            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange} className={"text"}></input>
+            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange}
+                   className={"text"}/>
             <label>
                 Password:
             </label>
-            <input type="password" value={this.state.password} onChange={this.handlePasswordChange} className={"text"}></input>
+            <input type="password" value={this.state.password} onChange={this.handlePasswordChange}
+                   className={"text"}/>
             <input type="submit" value="Submit" className={"submit"}/>
         </form>;
     }
 
-    optionalValidation() {
-        let validation;
-        if (this.state.validationErrors.length !== 0) {
-            validation = <ValidationPanel messages={this.state.validationErrors}/>
+    errorPanel() {
+        let error;
+        if (this.state.error !== "") {
+            error = <ErrorMessage error={this.state.error}/>
         }
-        return validation;
+        return error;
     }
 }
 

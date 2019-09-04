@@ -35,10 +35,18 @@ class IdeaForm extends Component {
         }));
     }
 
-    handleServerError(data) {
-        this.setState(() => ({
-            validationErrors: data.errors,
-        }));
+    handleServerError(res) {
+        if (res.status === 422) {
+            this.setState(() => ({
+                validationErrors: res.data.errors,
+            }));
+        } else if (res.status === 401) {
+            //TODO add handling
+            console.log("unauthorisee");
+        } else {
+            console.log(res);
+        }
+
     }
 
     postIdea = (title, text) => {
@@ -46,16 +54,14 @@ class IdeaForm extends Component {
             {
                 title: title,
                 text: text
+            }, {
+                withCredentials: true
             })
             .then((res) => {
-                    this.handleSuccess();
+                this.handleSuccess();
             })
             .catch((error) => {
-                if (error.response.status === 422) {
-                    this.handleServerError(error.response.data);
-                } else {
-                    console.log(error);
-                }
+                this.handleServerError(error.response);
             })
     };
 

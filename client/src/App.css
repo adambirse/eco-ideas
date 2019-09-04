@@ -138,6 +138,13 @@ h1 {
     font-size: 45px;
 }
 
+.alert {
+    padding: 1px;
+    background-color: #f44336; /* Red */
+    color: white;
+    margin-bottom: 10px;
+}
+
 .active, .accordion:hover {
     background-color: #ccc;
 }

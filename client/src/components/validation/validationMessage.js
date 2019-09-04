@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function ValidationMessage(props) {
-    return <div>
+    return <div className={"alert"}>
         <p>Field {props.message.param} is invalid - {props.message.msg}</p>
     </div>
 }

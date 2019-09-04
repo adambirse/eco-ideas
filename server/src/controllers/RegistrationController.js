@@ -44,11 +44,10 @@ exports.authenticate = (req, res) => {
                 send401(res);
             }
         } else {
-            send401();
+            send401(res);
         }
     }).catch(err => {
-        console.log(err);
-        res.status(500).send("ERROR ");
+       send401(res);
     });
 };
 
