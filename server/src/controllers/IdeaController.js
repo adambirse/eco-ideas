@@ -1,26 +1,29 @@
 const {Idea} = require("../models");
 
-exports.add = (req, res) => {
+exports.add = async (req, res) => {
 
-    Idea.create({
-        title: req.body.title,
-        text: req.body.text
-    })
-        .then(result => {
-            res.json(result);
-        })
-        .catch(err => {
-            console.log(err);
+    try {
+        const idea = await Idea.create({
+            title: req.body.title,
+            text: req.body.text
         });
+        res.json(idea);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
-exports.findAll =  (req, res) => {
-    Idea.findAll().then(ideas => {
-        return res.json(ideas);
-    }).catch(err => {
-        console.log("err");
-    });
+exports.findAll = async (req, res) => {
+        try {
+            const ideas = await Idea.findAll();
+            return res.json(ideas);
+        } catch (err) {
+            console.log(err);
+        }
 };
+
+
+
 
 
 
