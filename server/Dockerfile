@@ -1,6 +1,7 @@
-FROM node:12 as base
+FROM node:12.4-alpine as base
 
 FROM base as builder
+RUN apk --no-cache add --virtual builds-deps build-base python
 WORKDIR /builder
 COPY package.json /builder
 RUN npm install
