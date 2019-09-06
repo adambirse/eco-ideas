@@ -16,11 +16,11 @@ exports.register = (req, res) => {
                 password: password
             })
                 .then(result => {
-                    res.status(200).send("successfully registered");
+                    res.status(200).send("successfully registered.");
                 })
                 .catch(err => {
                     console.log(err);
-                    res.status(200).send("ERROR");
+                    res.status(500).send("ERROR");
                 });
         }
     }).catch(err => {

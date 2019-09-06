@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/ErrorMessage";
+import ValidationPanel from "../validation/validationPanel";
 
 const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
 const port = process.env.REACT_APP_SERVER_PORT || 5000;
 const serverUrl = `http://${server}:${port}`;
 const axios = require('axios');
 
-class LoginForm extends Component {
+class RegisterForm extends Component {
 
     constructor(props) {
         super(props);
@@ -16,14 +17,9 @@ class LoginForm extends Component {
             password: '',
             toDashboard: false,
             error: '',
+            validationErrors: []
         };
     }
-
-    clearErrors = () => {
-        this.setState(() => ({
-            error: ''
-        }));
-    };
 
     handleEmailChange = e => {
         this.setState({email_address: e.target.value});
@@ -36,8 +32,15 @@ class LoginForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.clearErrors();
-        this.login(this.state.email_address, this.state.password);
+        this.register(this.state.email_address, this.state.password);
     };
+
+    clearErrors() {
+        this.setState(() => ({
+            validationErrors: [],
+            error: ''
+        }));
+    }
 
     handleSuccess() {
         this.setState(() => ({
@@ -46,13 +49,19 @@ class LoginForm extends Component {
     }
 
     handleServerError(response) {
-        this.setState(() => ({
-            error: response.data.error
-        }));
+        if (response.status === 422) {
+            this.setState(() => ({
+                validationErrors: response.data.errors,
+            }));
+        } else {
+            this.setState(() => ({
+                error: response.data
+            }));
+        }
     }
 
-    login = (email_address, password) => {
-        axios.post(serverUrl + "/api/authenticate/",
+    register = (email_address, password) => {
+        axios.post(serverUrl + "/api/register/",
             {
                 email_address: email_address,
                 password: password
@@ -75,6 +84,7 @@ class LoginForm extends Component {
         return (
             <div>
                 {this.errorPanel()}
+                {this.optionalValidation()}
                 {this.getForm()}
             </div>
         );
@@ -96,6 +106,14 @@ class LoginForm extends Component {
         </form>;
     }
 
+    optionalValidation() {
+        let validation;
+        if (this.state.validationErrors.length !== 0) {
+            validation = <ValidationPanel messages={this.state.validationErrors}/>
+        }
+        return validation;
+    }
+
     errorPanel() {
         let error;
         if (this.state.error !== "") {
@@ -105,4 +123,4 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+export default RegisterForm;

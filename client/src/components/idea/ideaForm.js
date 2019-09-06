@@ -49,7 +49,6 @@ class IdeaForm extends Component {
         } else {
             console.log(response);
         }
-
     }
 
     postIdea = (title, text) => {
