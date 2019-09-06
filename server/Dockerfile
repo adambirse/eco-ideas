@@ -1,4 +1,4 @@
-FROM node:12-alpine as base
+FROM node:12 as base
 
 FROM base as builder
 WORKDIR /builder
@@ -15,7 +15,7 @@ COPY --from=builder /builder/build/ /app/build
 COPY --from=builder /builder/node_modules /app/node_modules
 COPY --from=builder builder/package.json /app
 
-ENV  NODE_ENV production
+ENV NODE_ENV production
 
 USER node
 CMD npm run start-prod

@@ -40,11 +40,15 @@ Do this to save money!
 
 - `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
 - `./server/build-for-gcp.sh`
-- `./server/deploy-for-gcp.sh`
-- `watch kubectl get svc` to get ip server ip address, 
+- `./server/deploy-service-for-gcp.sh`
+- `./client/deploy-service-for-gcp.sh`
+`
+- `watch kubectl get svc` to get ip server and client ip address, 
 - `./client/build-for-gcp.sh <SERVER_IP_ADDRESS>`
-- `./client/deploy-for-gcp.sh`
-- `watch kubectl get svc` to get the client ip address
+- `./client/deploy-deployment-for-gcp.sh`
+- update config with client ip --TODO automate http://34.89.80.93:80
+- `./server/deploy-config-for-gcp.sh`
+- `./server/deploy-deployment-for-gcp.sh`
 - http://CLIENT-IP
 
 

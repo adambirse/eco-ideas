@@ -21,7 +21,6 @@ app.use(morgan('combined'));
 app.use(cookieParser());
 
 app.use(function(req, res, next) {
-    //TODO fix local  host
     res.header("Access-Control-Allow-Origin", allowedOrigins);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');

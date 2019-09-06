@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # create build specific .env
-# TODO make parameter optional
 
+docker rmi client gcr.io/eco-ideas/client
 rm $(dirname "$0")/.env
 cat >> $(dirname "$0")/.env << EOL
 REACT_APP_SERVER_HOST=$1

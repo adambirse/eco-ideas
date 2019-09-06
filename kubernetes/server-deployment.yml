@@ -41,6 +41,11 @@ spec:
                 secretKeyRef:
                   name: config
                   key: database_name
+            - name: ALLOWED_ORIGINS
+              valueFrom:
+                configMapKeyRef:
+                  name: server-config
+                  key: allowed_origins
             - name: DATABASE_PORT
               value: "3306"
             - name: SECRET
