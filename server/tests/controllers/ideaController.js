@@ -43,7 +43,6 @@ describe('Idea Controller', function () {
                 const res = {json: json};
 
 
-
             Idea.findAll.resolves(data);
             
             ideaController.findAll({}, res);
