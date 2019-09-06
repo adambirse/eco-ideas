@@ -4,6 +4,9 @@ var bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const app = express();
 
+import 'dotenv/config';
+const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
+
 const ideaRouter = require('./routes/IdeaRoutes');
 const registrationRouter = require('./routes/RegistrationRoutes');
 
@@ -19,7 +22,7 @@ app.use(cookieParser());
 
 app.use(function(req, res, next) {
     //TODO fix local  host
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Origin", allowedOrigins);
     res.header('Access-Control-Allow-Credentials', true);
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
