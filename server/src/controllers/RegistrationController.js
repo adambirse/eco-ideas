@@ -1,44 +1,40 @@
 const {User} = require("../models");
 const jwt_util = require("../middleware/jwt");
 
-exports.register = (req, res) => {
+exports.register = async (req, res) => {
 
     const {email_address, password} = req.body;
-
-    User.findOne({
-        where: {email_address: email_address}
-    }).then(user => {
-        if (user) {
+    try {
+        const existingUser = await User.findOne({
+            where: {email_address: email_address}
+        });
+        if (existingUser) {
             res.status(500).send("ERROR");
         } else {
-            User.create({
+            const newUser = await User.create({
                 email_address: email_address,
                 password: password
-            })
-                .then(result => {
-                    res.status(200).send("successfully registered.");
-                })
-                .catch(err => {
-                    console.log(err);
-                    res.status(500).send("ERROR");
-                });
+            });
+            if (newUser) {
+                res.status(200).send("successfully registered.");
+            }
         }
-    }).catch(err => {
-        res.status(500).send("ERROR ");
-    });
-
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("ERROR");
+    }
 };
 
-exports.authenticate = (req, res) => {
+exports.authenticate = async (req, res) => {
 
     const {email_address, password} = req.body;
 
-    User.findOne({
-        where: {email_address: email_address}
-    }).then(user => {
+    try {
+        const user = await User.findOne({
+            where: {email_address: email_address}
+        });
         if (user) {
             if (user.validPassword(password)) {
-
                 issueToken(email_address, res);
             } else {
                 send401(res);
@@ -46,9 +42,9 @@ exports.authenticate = (req, res) => {
         } else {
             send401(res);
         }
-    }).catch(err => {
-       send401(res);
-    });
+    } catch (err) {
+        send401(res);
+    }
 };
 
 function send401(res) {
