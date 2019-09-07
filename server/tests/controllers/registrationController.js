@@ -13,7 +13,8 @@ describe('Registration Controller', function () {
     let User;
     let registrationController;
     let fakeUser;
-
+    let req;
+    let status, send;
 
     beforeEach(function () {
         User = {findOne: stub(), create: stub()};
@@ -24,6 +25,14 @@ describe('Registration Controller', function () {
             }
         };
         fakeUser = stub();
+        req = {
+            body: {
+                email_address: 'alreadyexists@test.com',
+                password: 'password'
+            }
+        };
+        status = stub();
+        send = stub();
 
         registrationController = proxyquire('../../src/controllers/RegistrationController', {
             '../models': mockModels,
@@ -31,66 +40,41 @@ describe('Registration Controller', function () {
         });
     });
 
-    describe('register()', function () {
-        it('User already exists ', function (done) {
+        it('register() - User already exists ', function (done) {
 
-            const req = {
-                body: {
-                    email_address: 'alreadyexists@test.com',
-                    password: 'password'
-                }
-            };
-
-            const status = stub();
-            const send = stub();
             status.callsFake(() => {
                 status.should.have.been.calledWithMatch(500);
-               return res;
-            });
-            send.callsFake(() => {
-                send.should.have.been.calledWithMatch("ERROR");
-                done();
-            });
-
-            const res = {status: status, send: send};
-
-            User.findOne.resolves(fakeUser);
-
-            registrationController.register(req, res);
-
-            User.findOne.should.have.been.called;
-            User.create.should.not.have.been.called;
-
-        });
-
-        it('User successfully created ', function (done) {
-
-            const req = {
-                body: {
-                    email_address: 'doesnotexists@test.com',
-                    password: 'password'
-                }
-            };
-
-            const status = stub();
-            const send = stub();
-            status.callsFake(() => {
-                status.should.have.been.calledWithMatch(200);
                 return res;
             });
             send.callsFake(() => {
-                send.should.have.been.calledWithMatch("successfully registered");
-                done();
+                send.should.have.been.calledWithMatch("ERROR");
+
             });
 
-            const res = {status: status, send: send};
+            User.findOne.resolves(fakeUser);
 
-            User.findOne.resolves(undefined);
-            User.create.resolves(fakeUser);
+            registrationController.register(req, {status: status, send: send});
 
-            registrationController.register(req, res);
+            done();
 
-            User.findOne.should.have.been.called;
         });
-    })
+
+    it('register() User successfully created ', function (done) {
+
+        status.callsFake(() => {
+            status.should.have.been.calledWithMatch(200);
+            return res;
+        });
+        send.callsFake(() => {
+            send.should.have.been.calledWithMatch("successfully registered");
+
+        });
+
+        User.findOne.returns(undefined);
+        User.create.returns(fakeUser);
+
+        registrationController.register(req, {status: status, send: send});
+        done();
+
+    });
 });
