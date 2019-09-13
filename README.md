@@ -42,7 +42,6 @@ Do this to save money!
 - `./server/build-for-gcp.sh`
 - `./server/deploy-service-for-gcp.sh`
 - `./client/deploy-service-for-gcp.sh`
-`
 - `watch kubectl get svc` to get ip server and client ip address, 
 - `./client/build-for-gcp.sh <SERVER_IP_ADDRESS>`
 - `./client/deploy-deployment-for-gcp.sh`
