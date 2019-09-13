@@ -1,11 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/ErrorMessage";
-
-const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
-const port = process.env.REACT_APP_SERVER_PORT || 5000;
-const serverUrl = `http://${server}:${port}`;
-const axios = require('axios');
+import {securePost} from "../../api/api";
 
 class LoginForm extends Component {
 
@@ -39,32 +35,24 @@ class LoginForm extends Component {
         this.login(this.state.email_address, this.state.password);
     };
 
-    handleSuccess() {
+    handleSuccess = () => {
         this.setState(() => ({
             toDashboard: true
         }));
-    }
+    };
 
-    handleServerError(response) {
+    handleServerError = (response) => {
         this.setState(() => ({
             error: response.data.error
         }));
-    }
+    };
 
     login = (email_address, password) => {
-        axios.post(serverUrl + "/api/authenticate/",
-            {
-                email_address: email_address,
-                password: password
-            }, {
-                withCredentials: true
-            })
-            .then((res) => {
-                this.handleSuccess();
-            })
-            .catch((error) => {
-                this.handleServerError(error.response);
-            })
+
+        securePost({
+            email_address: email_address,
+            password: password
+        },"authenticate",  this.handleSuccess,  this.handleServerError);
     };
 
     render() {

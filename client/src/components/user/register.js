@@ -2,11 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/ErrorMessage";
 import ValidationPanel from "../validation/validationPanel";
-
-const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
-const port = process.env.REACT_APP_SERVER_PORT || 5000;
-const serverUrl = `http://${server}:${port}`;
-const axios = require('axios');
+import {securePost} from "../../api/api";
 
 class RegisterForm extends Component {
 
@@ -42,13 +38,13 @@ class RegisterForm extends Component {
         }));
     }
 
-    handleSuccess() {
+    handleSuccess = () => {
         this.setState(() => ({
             toDashboard: true
         }));
-    }
+    };
 
-    handleServerError(response) {
+    handleServerError = (response) => {
         if (response.status === 422) {
             this.setState(() => ({
                 validationErrors: response.data.errors,
@@ -58,22 +54,13 @@ class RegisterForm extends Component {
                 error: response.data
             }));
         }
-    }
+    };
 
     register = (email_address, password) => {
-        axios.post(serverUrl + "/api/register/",
-            {
-                email_address: email_address,
-                password: password
-            }, {
-                withCredentials: true
-            })
-            .then((res) => {
-                this.handleSuccess();
-            })
-            .catch((error) => {
-                this.handleServerError(error.response);
-            })
+        securePost({
+            email_address: email_address,
+            password: password
+        },"register/",  this.handleSuccess,  this.handleServerError);
     };
 
     render() {

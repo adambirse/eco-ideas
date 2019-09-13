@@ -2,15 +2,9 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ValidationPanel from "../validation/validationPanel";
 import ErrorMessage from "../error/ErrorMessage";
-
-const axios = require('axios');
-
-const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
-const port = process.env.REACT_APP_SERVER_PORT || 5000;
-const serverUrl = `http://${server}:${port}`;
+import {securePost} from "../../api/api";
 
 class IdeaForm extends Component {
-
 
     constructor(props) {
         super(props);
@@ -31,13 +25,13 @@ class IdeaForm extends Component {
         e.preventDefault();
     };
 
-    handleSuccess() {
+    handleSuccess = ()  => {
         this.setState(() => ({
             toDashboard: true
         }));
-    }
+    };
 
-    handleServerError(response) {
+    handleServerError = (response) => {
         if (response.status === 422) {
             this.setState(() => ({
                 validationErrors: response.data.errors,
@@ -49,22 +43,10 @@ class IdeaForm extends Component {
         } else {
             console.log(response);
         }
-    }
+    };
 
     postIdea = (title, text) => {
-        axios.post(serverUrl + "/api/ideas/",
-            {
-                title: title,
-                text: text
-            }, {
-                withCredentials: true
-            })
-            .then((res) => {
-                this.handleSuccess();
-            })
-            .catch((error) => {
-                this.handleServerError(error.response);
-            })
+        securePost({title: title, text: text},"ideas",  this.handleSuccess,  this.handleServerError);
     };
 
     render() {
