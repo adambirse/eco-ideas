@@ -1,12 +1,7 @@
 import React, {Component} from 'react';
 import Idea from "./idea";
 import Filter from "../filter/filter";
-
-const axios = require('axios');
-
-const server = process.env.REACT_APP_SERVER_HOST || 'localhost';
-const port = process.env.REACT_APP_SERVER_PORT || 5000;
-const serverUrl = `http://${server}:${port}`;
+import {get} from "../../api/api";
 
 class IdeaList extends Component {
     // Initialize the state
@@ -37,17 +32,19 @@ class IdeaList extends Component {
         })
     };
 
-    // Retrieves the list of ideas from the Express app
-    getList = () => {
-        axios.get(serverUrl + '/api/ideas')
-            .then(res => res.data)
-            .then(list => this.setState({
-            list: list,
-            filteredList: list
-        }))
-            .catch(function (error) {
-                console.log(error);
+    handleSuccess = (data) => {
+        this.setState({
+                list: data,
+                filteredList: data
             });
+    };
+
+    handleError = (error) => {
+        console.log(error);
+    };
+
+    getList = () => {
+        get('ideas', this.handleSuccess, this.handleError);
     };
 
     render() {
