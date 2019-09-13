@@ -1,7 +1,7 @@
 const chai = require('chai');
 const {stub, resetHistory, assert} = require('sinon');
 const proxyquire = require('proxyquire');
-var sinonChai = require("sinon-chai");
+const sinonChai = require("sinon-chai");
 chai.should();
 chai.use(sinonChai);
 
