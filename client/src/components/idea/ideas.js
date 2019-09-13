@@ -55,7 +55,7 @@ class IdeaList extends Component {
                 <h2>List of Ideas</h2>
                 <Filter handleSearch={this.updateResults} handleReset={this.handleReset}/>
                 {filteredList.length ? (
-                    <div>
+                    <div className={'scrollable'}>
                         {filteredList.map(i => <Idea key={i.id} id={i.id} title={i.title} text={i.text}/>)}
                     </div>
                 ) : (

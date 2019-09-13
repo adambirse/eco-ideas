@@ -134,6 +134,11 @@ input[type=submit]:hover {
     transition: 0.4s;
 }
 
+.scrollable {
+    overflow-y: scroll;
+    max-height: 100vh;
+}
+
 h1 {
     font-size: 45px;
 }
