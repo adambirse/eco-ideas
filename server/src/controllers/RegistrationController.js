@@ -57,7 +57,8 @@ function send401(res) {
 function issueToken(email_address, res) {
     const payload = {email_address};
     const token = jwt_util.generateToken(payload);
-    res.cookie('token', token, {httpOnly: true}).sendStatus(200);
+    res.cookie('token', token, {httpOnly: true});
+    res.cookie('role', 'admin').sendStatus(200);
 }
 
 
