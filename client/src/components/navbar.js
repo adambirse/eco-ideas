@@ -1,8 +1,15 @@
 import React, {Component} from "react";
 import {Link} from 'react-router-dom'
+import {connect} from "react-redux";
 
 class NavBar extends Component {
 
+    constructor(props) {
+        super(props);
+        this.props = {
+            role: '',
+        };
+    }
 
     render() {
         return <div className="nav">
@@ -30,4 +37,9 @@ class NavBar extends Component {
     }
 }
 
-export default NavBar;
+const mapStateToProps = state => (
+    {
+        role: state.menuReducer.role
+    });
+
+export default connect(mapStateToProps, null)(NavBar);

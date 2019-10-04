@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/ErrorMessage";
 import {securePost} from "../../api/api";
+import { connect } from "react-redux";
+import addRole from "../../actions/actions";
 
 class LoginForm extends Component {
 
@@ -36,6 +38,7 @@ class LoginForm extends Component {
     };
 
     handleSuccess = () => {
+        this.props.addRole("admin");
         this.setState(() => ({
             toDashboard: true
         }));
@@ -93,4 +96,8 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+const mapDispatchToProps = dispatch => ({
+    addRole: (payload) => dispatch(addRole(payload))
+});
+
+export default connect(null, mapDispatchToProps)(LoginForm);
