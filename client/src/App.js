@@ -14,11 +14,7 @@ import RegisterForm from "./components/user/register";
 require('dotenv').config();
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
+    
     render() {
         return (
             <div className="Site">
