@@ -3,6 +3,7 @@ describe('Smoke test', function() {
         cy.visit('http://localhost:3000/');
         cy.contains('Eco Ideas');
         cy.contains('Home');
-        cy.contains('Admin');
+        cy.contains('Login');
+        cy.contains('Register');
     })
 });
