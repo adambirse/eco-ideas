@@ -1,7 +1,7 @@
 const {User} = require("../models");
 const jwt_util = require("../middleware/jwt");
 
-exports.register = async (req, res) => {
+exports.createAccount = async (req, res) => {
 
     const {email_address, password} = req.body;
     try {

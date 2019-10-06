@@ -4,7 +4,7 @@ const {check, validationResult} = require('express-validator/check');
 
 const registrationRouter = express.Router();
 
-registrationRouter.post('/api/register', [
+registrationRouter.post('/api/create-account', [
     check('email_address').isEmail().withMessage('email address is not valid.'),
     check('password').isLength({min: 5}).withMessage('password must be a minimum of 5 characters.'),
 ], function (req, res) {
@@ -13,7 +13,7 @@ registrationRouter.post('/api/register', [
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     } else {
-        registrationController.register(req, res);
+        registrationController.createAccount(req, res);
     }
 });
 

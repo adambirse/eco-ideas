@@ -4,7 +4,7 @@ import ErrorMessage from "../error/ErrorMessage";
 import ValidationPanel from "../validation/validationPanel";
 import {securePost} from "../../api/api";
 
-class RegisterForm extends Component {
+class CreateAccountForm extends Component {
 
     constructor(props) {
         super(props);
@@ -60,7 +60,7 @@ class RegisterForm extends Component {
         securePost({
             email_address: email_address,
             password: password
-        },"register/",  this.handleSuccess,  this.handleServerError);
+        },"create-account/",  this.handleSuccess,  this.handleServerError);
     };
 
     render() {
@@ -110,4 +110,4 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+export default CreateAccountForm;

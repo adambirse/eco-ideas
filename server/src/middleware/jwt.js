@@ -15,7 +15,6 @@ exports.verify = (token, res, next) => {
         if (err) {
             res.status(401).send('Unauthorized: Invalid token');
         } else {
-            // req.email = decoded.email;
             next();
         }
     });
