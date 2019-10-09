@@ -1,7 +1,7 @@
 import React from "react";
 
 require('dotenv').config();
-const imgUrl = process.env.PUBLIC_URL + 'green-leaves.jpg';
+const imgUrl = process.env.PUBLIC_URL + '../green-leaves.jpg';
 
 function Header() {
 

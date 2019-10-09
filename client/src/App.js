@@ -27,7 +27,7 @@ class App extends Component {
                             <Route path='/admin' component={Admin}/>
                             <Route path='/login' component={LoginForm}/>
                             <Route path='/register' component={RegisterForm}/>
-                            <Route path='/create-account' component={CreateAccountForm}/>
+                            <Route path='/create-account/:hash' component={CreateAccountForm}/>
                             <Route path='/' component={IdeaList}/>
                         </Switch>
                     </div>
