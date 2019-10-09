@@ -31,7 +31,8 @@ const validateHash = async (email_address, invite_hash) => {
     return Invite.findOne({
         where: {
             email_address: email_address,
-            invite_hash: invite_hash
+            invite_hash: invite_hash,
+            status: 'sent'
         }
     });
 };
@@ -53,6 +54,7 @@ exports.create = async (req, res) => {
                     password: password
                 });
                 if (newUser) {
+                    await invite.update({status: 'accepted'});
                     res.status(200).send("successfully created an account.");
                 }
             }
