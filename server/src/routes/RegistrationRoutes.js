@@ -13,7 +13,20 @@ registrationRouter.post('/api/create-account', [
     if (!errors.isEmpty()) {
         return res.status(422).json({errors: errors.array()});
     } else {
-        registrationController.createAccount(req, res);
+        registrationController.create(req, res);
+    }
+});
+
+registrationRouter.post('/api/register', [
+    check('email_address').isEmail().withMessage('email address is not valid.'),
+], function (req, res) {
+
+    const errors = validationResult(req);
+    console.log(errors);
+    if (!errors.isEmpty()) {
+        return res.status(422).json({errors: errors.array()});
+    } else {
+        registrationController.register(req, res);
     }
 });
 

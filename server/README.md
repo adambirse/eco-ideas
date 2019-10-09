@@ -13,6 +13,10 @@ Start docker mysql database (subsequent times):
 
 `docker start mysql`
 
+Start Mail server:
+
+` docker run --name mail-sink -p 8765:8080 -p 8025:8025 -d primednumber/mail-sink`
+
 Start node server:
 
 `npm run start`

@@ -2,15 +2,14 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/ErrorMessage";
 import ValidationPanel from "../validation/validationPanel";
-import {securePost} from "../../api/api";
+import {post} from "../../api/api";
 
-class CreateAccountForm extends Component {
+class RegisterForm extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             email_address: '',
-            password: '',
             toDashboard: false,
             error: '',
             validationErrors: []
@@ -21,14 +20,10 @@ class CreateAccountForm extends Component {
         this.setState({email_address: e.target.value});
     };
 
-    handlePasswordChange = e => {
-        this.setState({password: e.target.value});
-    };
-
     handleSubmit = (e) => {
         e.preventDefault();
         this.clearErrors();
-        this.register(this.state.email_address, this.state.password);
+        this.register(this.state.email_address);
     };
 
     clearErrors() {
@@ -56,11 +51,10 @@ class CreateAccountForm extends Component {
         }
     };
 
-    register = (email_address, password) => {
-        securePost({
-            email_address: email_address,
-            password: password
-        },"create-account/",  this.handleSuccess,  this.handleServerError);
+    register = (email_address) => {
+        post({
+            email_address: email_address
+        },"register/",  this.handleSuccess,  this.handleServerError);
     };
 
     render() {
@@ -84,11 +78,6 @@ class CreateAccountForm extends Component {
             </label>
             <input type="text" value={this.state.email_address} onChange={this.handleEmailChange}
                    className={"text"}/>
-            <label>
-                Password:
-            </label>
-            <input type="password" value={this.state.password} onChange={this.handlePasswordChange}
-                   className={"text"}/>
             <input type="submit" value="Submit" className={"submit"}/>
         </form>;
     }
@@ -110,4 +99,4 @@ class CreateAccountForm extends Component {
     }
 }
 
-export default CreateAccountForm;
+export default RegisterForm;

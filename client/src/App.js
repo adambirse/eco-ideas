@@ -9,7 +9,8 @@ import IdeaList from "./components/idea/ideas";
 import Admin from "./components/admin/admin";
 import About from "./components/about/about";
 import LoginForm from "./components/user/login";
-import CreateAccountForm from "./components/user/createAccount";
+import RegisterForm from "./components/user/RegisterForm";
+import CreateAccountForm from "./components/user/CreateAccountForm";
 
 require('dotenv').config();
 
@@ -25,7 +26,8 @@ class App extends Component {
                             <Route exact path='/' component={IdeaList}/>
                             <Route path='/admin' component={Admin}/>
                             <Route path='/login' component={LoginForm}/>
-                            <Route path='/register' component={CreateAccountForm}/>
+                            <Route path='/register' component={RegisterForm}/>
+                            <Route path='/create-account' component={CreateAccountForm}/>
                             <Route path='/' component={IdeaList}/>
                         </Switch>
                     </div>

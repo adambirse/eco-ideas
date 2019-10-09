@@ -11,18 +11,23 @@ const {makeMockModels} = require('sequelize-test-helpers');
 describe('Registration Controller', function () {
 
     let User;
+    let Invite;
     let registrationController;
     let fakeUser;
+    let fakeInvite;
 
     beforeEach(function () {
         User = {findOne: stub(), create: stub()};
-        const mockModels = makeMockModels({User});
+        Invite = {findOne: stub(), create: stub()};
+
+        const mockModels = makeMockModels({User, Invite});
         const jwt_utils_stub = {
             generateToken: (payload) => {
                 return payload
             }
         };
         fakeUser = stub();
+        fakeInvite = stub();
 
         registrationController = proxyquire('../../src/controllers/RegistrationController', {
             '../models': mockModels,
@@ -42,21 +47,23 @@ describe('Registration Controller', function () {
         };
 
         const status = stub();
-        const send = stub();
+        const json = stub();
         status.callsFake(() => {
-            status.should.have.been.calledWithMatch(500);
+            status.should.have.been.calledWithMatch(422);
             return res;
         });
-        send.callsFake(() => {
-            send.should.have.been.calledWithMatch("ERROR");
+        json.callsFake(() => {
+            json.should.have.been.calledWithMatch({errors: [{"value": "email_address", "msg": "Invalid email address. User already exists.","param":"email_address","location":"body"}]});
         });
 
-        const res = {status: status, send: send};
+        const res = {status: status, json: json};
 
+        Invite.findOne.resolves(fakeInvite);
         User.findOne.resolves(fakeUser);
 
-        await registrationController.register(req, res);
+        await registrationController.create(req, res);
         User.findOne.should.have.been.called;
+        Invite.findOne.should.have.been.called;
         User.create.should.not.have.been.called;
 
     });
@@ -77,16 +84,18 @@ describe('Registration Controller', function () {
             return res;
         });
         send.callsFake(() => {
-            send.should.have.been.calledWithMatch("successfully registered");
+            send.should.have.been.calledWithMatch("successfully created an account.");
         });
 
         const res = {status: status, send: send};
 
+        Invite.findOne.resolves(fakeInvite);
         User.findOne.resolves(undefined);
         User.create.resolves(fakeUser);
 
-        await registrationController.register(req, res);
+        await registrationController.create(req, res);
 
+        Invite.findOne.should.have.been.called;
         User.findOne.should.have.been.called;
         User.create.should.have.been.calledWith(req.body);
     });

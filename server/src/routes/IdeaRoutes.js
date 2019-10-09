@@ -6,7 +6,6 @@ const withAuth = require('../middleware/middleware');
 
 const ideaRouter = express.Router();
 
-
 ideaRouter.post('/api/ideas/', withAuth, [
     check('title').not().isEmpty().withMessage('Title must not be empty.'),
     check('text').not().isEmpty().withMessage('Text must not be empty.'),

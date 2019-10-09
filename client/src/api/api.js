@@ -17,6 +17,17 @@ export function securePost(body, resource, handleSuccess, handleFailure) {
         })
 }
 
+export function post(body, resource, handleSuccess, handleFailure) {
+    axios.post(serverUrl + '/' + base + '/' + resource,
+        body)
+        .then((res) => {
+            handleSuccess();
+        })
+        .catch((error) => {
+            handleFailure(error.response);
+        })
+}
+
 export function get(resource, handleSuccess, handleFailure) {
     axios.get(serverUrl + '/' + base + '/' + resource)
         .then(res => res.data)

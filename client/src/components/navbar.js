@@ -24,13 +24,13 @@ class NavBar extends Component {
                 <ul><Link to='/'>Home</Link></ul>
                 <ul><Link to='/admin'>Admin</Link></ul>
                 <ul><Link to='/login'>Login</Link></ul>
-                <ul><Link to='/register'>Create Account</Link></ul>
+                <ul><Link to='/register'>Register</Link></ul>
             </li>
         } else {
             menu = <li>
                 <ul><Link to='/'>Home</Link></ul>
                 <ul><Link to='/login'>Login</Link></ul>
-                <ul><Link to='/register'>Create Account</Link></ul>
+                <ul><Link to='/register'>Register</Link></ul>
             </li>
         }
         return menu;
