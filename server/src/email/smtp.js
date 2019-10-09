@@ -1,11 +1,16 @@
 const nodemailer = require('nodemailer');
-//TODO parameterise connections details
+
+const smtp_server = process.env.MAIL_SERVER || 'localhost';
+const smtp_port = process.env.MAIL_PORT || 8025;
+const smtp_user = process.env.MAIL_USER || 'smtp';
+const smtp_password = process.env.MAIL_PASSWORD || 'smtp';
+
 let transport = nodemailer.createTransport({
-    host: 'localhost',
-    port: 8025,
+    host: smtp_server,
+    port: smtp_port,
     auth: {
-        user: 'smtp',
-        pass: 'smtp'
+        user: smtp_user,
+        pass: smtp_password
     }
 });
 
