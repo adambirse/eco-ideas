@@ -27,7 +27,7 @@ describe('Registration Controller', function () {
             }
         };
         fakeUser = stub();
-        fakeInvite = stub();
+        fakeInvite = {update: stub()};
 
         registrationController = proxyquire('../../src/controllers/RegistrationController', {
             '../models': mockModels,

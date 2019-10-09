@@ -40,3 +40,7 @@ yarn-error.log*
 **/terraform.tfstate
 **/terraform.tfstate.backup
 **/.terraform.tfstate.lock.info
+
+
+### unit test converage
+.nyc_output
