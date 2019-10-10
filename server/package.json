@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "test": "nyc --reporter=text mocha ./tests --recursive --require @babel/register",
+    "test": "nyc --check-coverage --lines 80 --reporter=text mocha ./tests --recursive --require @babel/register",
     "start": "nodemon --exec babel-node src/server.js",
     "start-prod": "node build/server.js",
     "build-prod": "babel src -d build"
