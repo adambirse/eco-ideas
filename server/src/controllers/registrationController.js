@@ -1,5 +1,5 @@
 const {User, Invite} = require("../models");
-const jwt_util = require("../middleware/jwt");
+const jwt_utils = require("../middleware/jwt");
 const {checkEmail, sendEmail} = require("../email/email-handler");
 const uuidv4 = require('uuid/v4');
 
@@ -25,16 +25,6 @@ exports.register = async (req, res) => {
         console.log(err);
         res.status(500).send("Internal server error.");
     }
-};
-
-const validateHash = async (email_address, invite_hash) => {
-    return Invite.findOne({
-        where: {
-            email_address: email_address,
-            invite_hash: invite_hash,
-            status: 'sent'
-        }
-    });
 };
 
 exports.create = async (req, res) => {
@@ -90,6 +80,16 @@ exports.authenticate = async (req, res) => {
     }
 };
 
+const validateHash = async (email_address, invite_hash) => {
+    return Invite.findOne({
+        where: {
+            email_address: email_address,
+            invite_hash: invite_hash,
+            status: 'sent'
+        }
+    });
+};
+
 function send401(res) {
     res.status(401)
         .json({
@@ -99,7 +99,7 @@ function send401(res) {
 
 function issueToken(email_address, res) {
     const payload = {email_address};
-    const token = jwt_util.generateToken(payload);
+    const token = jwt_utils.generateToken(payload);
     res.cookie('token', token, {httpOnly: true});
     res.cookie('role', 'admin').sendStatus(200);
 }

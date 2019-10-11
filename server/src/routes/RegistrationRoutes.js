@@ -1,5 +1,5 @@
 const express = require('express');
-const registrationController = require('../controllers/RegistrationController');
+const registrationController = require('../controllers/registrationController');
 const {check, validationResult} = require('express-validator/check');
 
 const registrationRouter = express.Router();
