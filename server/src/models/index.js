@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 
 import 'dotenv/config';
-const port = process.env.DATABASE_PORT || 3306;
+const port = process.env.DATABASE_PORT || 3310;
 const host = process.env.DATABASE_HOST || 'localhost';
 const databaseName = process.env.DATABASE_NAME || 'eco';
 const databaseUser = process.env.DATABASE_USER || 'root';

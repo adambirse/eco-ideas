@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+import 'dotenv/config';
 
 const smtp_server = process.env.MAIL_SERVER || 'localhost';
 const smtp_port = process.env.MAIL_PORT || 8025;

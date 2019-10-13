@@ -22,6 +22,7 @@ exports.sendEmail = async (email_address, uuid) => {
          await transport.sendMail(message);
          return true;
     } catch (e) {
+        console.log(e);
         return false;
     }
 };
