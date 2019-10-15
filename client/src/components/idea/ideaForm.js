@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ValidationPanel from "../validation/validationPanel";
-import ErrorMessage from "../error/ErrorMessage";
+import ErrorMessage from "../error/error-message";
 import {securePost} from "../../api/api";
 
 class IdeaForm extends Component {

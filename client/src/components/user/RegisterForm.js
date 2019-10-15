@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import ErrorMessage from "../error/ErrorMessage";
+import ErrorMessage from "../error/error-message";
 import ValidationPanel from "../validation/validationPanel";
 import {post} from "../../api/api";
 

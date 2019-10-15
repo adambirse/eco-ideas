@@ -16,6 +16,8 @@
 /client/build
 /server/build
 
+/client/coverage
+
 
 # misc
 .DS_Store

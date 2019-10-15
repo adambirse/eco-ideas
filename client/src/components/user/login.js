@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
-import ErrorMessage from "../error/ErrorMessage";
+import ErrorMessage from "../error/error-message";
 import {securePost} from "../../api/api";
 import { connect } from "react-redux";
 import addRole from "../../actions/actions";
