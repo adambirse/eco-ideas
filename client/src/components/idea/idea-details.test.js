@@ -2,7 +2,7 @@ import React from "react";
 import {render, unmountComponentAtNode} from "react-dom";
 import {act} from "react-dom/test-utils";
 
-import About from "./about";
+import IdeaDetails from "./idea-details";
 
 let container = null;
 beforeEach(() => {
@@ -20,13 +20,15 @@ afterEach(() => {
 
 it("renders", () => {
     act(() => {
-        render(<About/>, container);
+        render(<IdeaDetails text = "Idea details text"/>, container);
     });
 
-    expect(container.querySelector("h3").textContent
-    ).toEqual("About me");
+    expect(container.querySelector("div").classList.contains("panel")).toBe(true);
 
-    const elements = container.querySelectorAll("p");
-    expect(elements[0].textContent).toEqual('This is my react and node application for practicing my development skills.');
-    expect(elements[1].textContent).toEqual('It makes use of Terraform, Kubernetes and Circle CI for deployment. Automated testing is carried out with Cypress.');
+    expect(container.querySelector("h5").textContent
+    ).toEqual("Details:");
+
+    expect(container.querySelector("p").textContent
+    ).toEqual("Idea details text");
+
     });

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import IdeaDetails from './ideaDetails';
+import IdeaDetails from './idea-details';
 import PropTypes from 'prop-types';
 
 class Idea extends Component {
