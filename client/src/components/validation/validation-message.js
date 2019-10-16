@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function ValidationMessage(props) {
-    return <div className={"alert"}>
-        <p>Field {props.message.param} is invalid - {props.message.msg}</p>
-    </div>
+    if(props.message) {
+        return <div className={"alert"}>
+            <p>Field {props.message.param} is invalid - {props.message.msg}</p>
+        </div>
+    }
+    return <div></div>;
 }
 
 ValidationMessage.propTypes = {

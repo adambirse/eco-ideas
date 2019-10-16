@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/error-message";
-import ValidationPanel from "../validation/validationPanel";
+import ValidationPanel from "../validation/validation-panel";
 import {post} from "../../api/api";
 
 class RegisterForm extends Component {
