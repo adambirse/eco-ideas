@@ -9,12 +9,15 @@ describe('Email Handler', function () {
 
     let emailHandler;
     let message = 'message';
-    let sendMailStub = stub();
+    let send = stub();
 
     beforeEach(function () {
 
         emailHandler = proxyquire('../../src/email/email-handler', {
-            './smtp': {sendMail: sendMailStub, '@noCallThru': true}
+            '@sendgrid/mail': {
+                send: send,
+                setApiKey: stub(), '@noCallThru': true
+            }
         });
     });
 
@@ -29,17 +32,17 @@ describe('Email Handler', function () {
     });
 
     it('email success', async function () {
-        sendMailStub.resolves("success");
+        send.resolves("success");
         const result = await emailHandler.sendEmail("test@email.com", 'uuid');
         result.should.equal(true);
-        sendMailStub.should.have.been.called;
+        send.should.have.been.called;
     });
 
     it('email failure', async function () {
-        await sendMailStub.rejects("exception");
+        await send.rejects("exception");
         const result = await emailHandler.sendEmail("test@email.com", 'uuid');
         result.should.equal(false);
-        sendMailStub.should.have.been.called;
+        send.should.have.been.called;
     });
 
 });

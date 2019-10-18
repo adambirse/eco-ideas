@@ -37,6 +37,7 @@ yarn-error.log*
 *.ipr
 
 /server/build/**
+/server/personal.env
 
 .terraform
 **/terraform.tfstate

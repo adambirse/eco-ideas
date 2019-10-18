@@ -13,9 +13,15 @@ Start docker mysql database (subsequent times):
 
 `docker start mysql`
 
-Start Mail server:
+Mail server:
 
-` docker run --name mail-sink -p 8765:8080 -p 8025:8025 -d primednumber/mail-sink`
+Eco-ideas uses send grid https://app.sendgrid.com/ for emails.
+
+In order to use this functionality you will need to: 
+
+- create an account with them and an api key.
+- add them to your .env file.  Example [here](./server/env/.env_example)
+  
 
 Start node server:
 
