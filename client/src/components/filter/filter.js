@@ -26,8 +26,8 @@ class Filter extends Component {
                 Filter:
             </label>
             <input type="text"  value={this.state.value} placeholder={"filter by title"} onChange={this.handleChange} className={"third-width text"}/>
-            <input type="submit" value="Filter" onClick={this.filter} className={"tenth-width submit"}/>
-            <input type="submit" value="Reset" onClick={this.reset} className={"tenth-width submit"}/>
+            <input type="submit" name = 'submit' value="Filter" onClick={this.filter} className={"tenth-width submit"}/>
+            <input type="submit" name = 'reset' value="Reset" onClick={this.reset} className={"tenth-width submit"}/>
         </div>;
     }
 
