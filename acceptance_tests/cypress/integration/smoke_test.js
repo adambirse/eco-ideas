@@ -4,6 +4,6 @@ describe('Smoke test', function() {
         cy.contains('Eco Ideas');
         cy.contains('Home');
         cy.contains('Login');
-        cy.contains('Create Account');
+        cy.contains('Register');
     })
 });
