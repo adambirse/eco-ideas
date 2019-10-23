@@ -46,6 +46,11 @@ spec:
                 configMapKeyRef:
                   name: server-config
                   key: allowed_origins
+            - name: REGISTRATION_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: server-config
+                  key: registration_endpoint
             - name: DATABASE_PORT
               value: "3306"
             - name: SECRET
@@ -53,6 +58,21 @@ spec:
                 secretKeyRef:
                   name: config
                   key: secret
+            - name: API_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: server-email-config
+                  key: api_key
+            - name: VALID_ADMIN_EMAIL_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: server-email-config
+                  key: valid_admin_email_address
+            - name: SENDER_EMAIL
+              valueFrom:
+                configMapKeyRef:
+                  name: server-email-config
+                  key: sender_email
           ports:
             - containerPort: 5000
           readinessProbe:

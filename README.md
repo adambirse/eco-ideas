@@ -45,7 +45,8 @@ Do this to save money!
 - `watch kubectl get svc` to get ip server and client ip address, 
 - `./client/build-for-gcp.sh <SERVER_IP_ADDRESS>`
 - `./client/deploy-deployment-for-gcp.sh`
-- update config with client ip --TODO automate http://34.89.80.93:80
+- update server-config with client ip (http://34.89.80.93:80) and registration endpoint (http://34.89.80.93:80/create-account) --TODO automate
+- create `server-email-config.yml` based on `server-email-config.yml.EXAMPLE` containing your send grid configuration
 - `./server/deploy-config-for-gcp.sh`
 - `./server/deploy-deployment-for-gcp.sh`
 - http://CLIENT-IP
