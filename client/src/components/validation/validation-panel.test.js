@@ -7,7 +7,7 @@ import ValidationPanel from "./validation-panel";
 let container = null;
 
 jest.mock("./validation-message", () => {
-    return function DummyMessage(props) {
+    return function render(props) {
         return (
             <div>
                 <p>Dummy message - {props.message.param}</p>

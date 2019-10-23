@@ -5,9 +5,7 @@ import PropTypes from "prop-types";
 class IdeaDetails extends Component {
 
     render = () => {
-
         return (
-
             <div className='panel'>
                 <h5>Details:</h5>
                 <p>{this.props.text}</p>
@@ -19,6 +17,5 @@ class IdeaDetails extends Component {
 IdeaDetails.propTypes = {
     text: PropTypes.string
 };
-
 
 export default IdeaDetails;
