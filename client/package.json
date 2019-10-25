@@ -22,7 +22,7 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "collectCoverageFrom" : ["src/**/*.js"]
+    "collectCoverageFrom" : ["src/**/*.js", "!src/index.js","!src/serviceWorker.js"]
   },
   "eslintConfig": {
     "extends": "react-app"

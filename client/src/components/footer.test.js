@@ -2,7 +2,7 @@ import React from "react";
 import {render, unmountComponentAtNode} from "react-dom";
 import {act} from "react-dom/test-utils";
 
-import Header from "./header";
+import Footer from "./footer";
 
 let container = null;
 beforeEach(() => {
@@ -20,9 +20,9 @@ afterEach(() => {
 
 it("renders", () => {
     act(() => {
-        render(<Header/>, container);
+        render(<Footer/>, container);
     });
 
-    expect(container.querySelector("h1").textContent).toEqual("Eco Ideas");
+    expect(container.querySelector("p").textContent).toEqual("eco ideas");
 
 });
