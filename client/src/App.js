@@ -21,7 +21,7 @@ class App extends Component {
             <div className="Site">
                 <Header/>
                 <div className="HolyGrail-body">
-                    <div className="HolyGrail-content">
+                    <div role="main" className="HolyGrail-content">
                         <Switch>
                             <Route exact path='/' component={IdeaList}/>
                             <Route path='/admin' component={Admin}/>
@@ -31,10 +31,10 @@ class App extends Component {
                             <Route path='/' component={IdeaList}/>
                         </Switch>
                     </div>
-                    <div className="HolyGrail-nav">
+                    <div role="navigation" className="HolyGrail-nav">
                         <NavBar/>
                     </div>
-                    <div className="HolyGrail-ads">
+                    <div role="complementary" className="HolyGrail-ads">
                         <About/>
                     </div>
                 </div>

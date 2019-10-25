@@ -63,7 +63,6 @@ textarea {
 .submit {
     width: 100%;
     background-color: #4CAF50;
-    color: white;
     padding: 14px 20px;
     margin: 8px 0;
     border: none;
@@ -89,7 +88,6 @@ input[type=submit]:hover {
     text-align: center;
 }
 
-
 .header {
     padding: 20px;
 }
@@ -97,7 +95,6 @@ input[type=submit]:hover {
 .footer {
     padding: 10px;
 }
-
 
 /* Style the top navigation bar */
 .nav {

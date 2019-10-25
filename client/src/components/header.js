@@ -5,7 +5,7 @@ const imgUrl = process.env.PUBLIC_URL + '../green-leaves.jpg';
 
 function Header() {
 
-    return <div className = 'header'
+    return <div role = "banner" className = 'header'
                 style = {{ backgroundImage: 'url(' + imgUrl + ')',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',

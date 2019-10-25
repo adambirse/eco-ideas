@@ -84,8 +84,8 @@ describe("Ideas", () => {
 
         expect(get).toHaveBeenCalledTimes(1);
         const headers = container.querySelectorAll("h2");
-        expect(headers[0].textContent).toBe("List of Ideas");
-        expect(headers[1].textContent).toBe("No Ideas Found");
+        expect(container.querySelector("h2").textContent).toBe("List of Ideas");
+        expect(container.querySelector("h3").textContent).toBe("No Ideas Found");
         expect(container.querySelector("p").textContent).toBe("Im a filter");
 
     });

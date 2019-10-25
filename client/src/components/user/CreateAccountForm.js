@@ -63,7 +63,7 @@ class CreateAccountForm extends Component {
             password: password,
             invite_hash: invite_hash
 
-        },"create-account/",  this.handleSuccess,  this.handleServerError);
+        }, "create-account/", this.handleSuccess, this.handleServerError);
     };
 
     render() {
@@ -82,17 +82,13 @@ class CreateAccountForm extends Component {
 
     getForm() {
         return <form onSubmit={this.handleSubmit}>
-            <label>
-                Email:
-            </label>
-            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange}
+            <label htmlFor={"email"}>Email:</label>
+            <input id="email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
                    className={"text"}/>
-            <label>
-                Password:
-            </label>
-            <input type="password" value={this.state.password} onChange={this.handlePasswordChange}
+            <label htmlFor={"password"}>Password:</label>
+            <input id="password" type="password" value={this.state.password} onChange={this.handlePasswordChange}
                    className={"text"}/>
-            <input type="submit" value="Submit" className={"submit"}/>
+            <input type="submit" value="submit" className={"submit"}/>
         </form>;
     }
 

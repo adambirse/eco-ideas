@@ -73,12 +73,10 @@ class RegisterForm extends Component {
 
     getForm() {
         return <form onSubmit={this.handleSubmit}>
-            <label>
-                Email:
-            </label>
-            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange}
+            <label htmlFor={"email"}>Email:</label>
+            <input id= "email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
                    className={"text"}/>
-            <input type="submit" value="Submit" className={"submit"}/>
+            <input value="submit" type="submit"  className={"submit"}/>
         </form>;
     }
 

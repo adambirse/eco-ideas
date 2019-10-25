@@ -7,7 +7,7 @@ class IdeaDetails extends Component {
     render = () => {
         return (
             <div className='panel'>
-                <h5>Details:</h5>
+                <h3>Details:</h3>
                 <p>{this.props.text}</p>
             </div>
         );

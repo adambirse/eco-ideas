@@ -60,7 +60,7 @@ class IdeaList extends Component {
                     </div>
                 ) : (
                     <div>
-                        <h2>No Ideas Found</h2>
+                        <h3>No Ideas Found</h3>
                     </div>
                 )
                 }

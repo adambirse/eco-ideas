@@ -25,7 +25,7 @@ it("renders", () => {
 
     expect(container.querySelector("div").classList.contains("panel")).toBe(true);
 
-    expect(container.querySelector("h5").textContent
+    expect(container.querySelector("h3").textContent
     ).toEqual("Details:");
 
     expect(container.querySelector("p").textContent

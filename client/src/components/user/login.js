@@ -73,17 +73,13 @@ class LoginForm extends Component {
 
     getForm() {
         return <form onSubmit={this.handleSubmit}>
-            <label>
-                Email:
-            </label>
-            <input type="text" value={this.state.email_address} onChange={this.handleEmailChange}
+            <label htmlFor={"email"}>Email:</label>
+            <input id="email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
                    className={"text"}/>
-            <label>
-                Password:
-            </label>
-            <input type="password" value={this.state.password} onChange={this.handlePasswordChange}
+            <label htmlFor={"password"}>Password:</label>
+            <input id="password" type="password" value={this.state.password} onChange={this.handlePasswordChange}
                    className={"text"}/>
-            <input type="submit" value="Submit" className={"submit"}/>
+            <input value="submit" type="submit" className={"submit"}/>
         </form>;
     }
 

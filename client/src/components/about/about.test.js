@@ -23,7 +23,7 @@ it("renders", () => {
         render(<About/>, container);
     });
 
-    expect(container.querySelector("h3").textContent
+    expect(container.querySelector("h2").textContent
     ).toEqual("About me");
 
     const elements = container.querySelectorAll("p");

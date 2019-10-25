@@ -20,18 +20,18 @@ class NavBar extends Component {
     menu() {
         let menu;
         if (this.props.role === "admin") {
-            menu = <li>
-                <ul><Link to='/'>Home</Link></ul>
-                <ul><Link to='/admin'>Admin</Link></ul>
-                <ul><Link to='/login'>Login</Link></ul>
-                <ul><Link to='/register'>Register</Link></ul>
-            </li>
+            menu = <div>
+                <Link to='/'>Home</Link>
+                <Link to='/admin'>Admin</Link>
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+            </div>
         } else {
-            menu = <li>
-                <ul><Link to='/'>Home</Link></ul>
-                <ul><Link to='/login'>Login</Link></ul>
-                <ul><Link to='/register'>Register</Link></ul>
-            </li>
+            menu = <div>
+                <Link to='/'>Home</Link>
+                <Link to='/login'>Login</Link>
+                <Link to='/register'>Register</Link>
+            </div>
         }
         return menu;
     }
