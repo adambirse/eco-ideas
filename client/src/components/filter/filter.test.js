@@ -23,7 +23,6 @@ it("renders", () => {
         render(<Filter />, container);
     });
     expect(container.querySelector("label").textContent).toBe("Filter:");
-    const inputs = container.querySelectorAll("input");
 
     expect(container.querySelector('input[name="submit"]').value).toEqual('Filter');
     expect(container.querySelector('input[name="reset"]').value).toEqual('Reset');

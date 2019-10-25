@@ -1,5 +1,5 @@
 const chai = require('chai');
-const {stub, resetHistory, assert} = require('sinon');
+const {stub} = require('sinon');
 const proxyquire = require('proxyquire');
 const sinonChai = require("sinon-chai");
 chai.should();
@@ -8,7 +8,6 @@ chai.use(sinonChai);
 describe('Email Handler', function () {
 
     let emailHandler;
-    let message = 'message';
     let send = stub();
 
     beforeEach(function () {

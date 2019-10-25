@@ -1,5 +1,5 @@
 const chai = require('chai');
-const {stub, resetHistory, assert} = require('sinon');
+const {stub, resetHistory} = require('sinon');
 const proxyquire = require('proxyquire');
 const sinonChai = require("sinon-chai");
 chai.should();
@@ -224,7 +224,6 @@ describe('Registration Controller', function () {
 
         User.findOne.resolves(fakeUser);
         fakeUser.validPassword.returns(true);
-        const payload = {email_address: 'test@eco-ideas.com'};
         jwt_utils.generateToken.returns('token');
 
         const res = {sendStatus: sendStatus, cookie: cookie};
