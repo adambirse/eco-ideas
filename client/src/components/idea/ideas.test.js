@@ -5,9 +5,10 @@ import {act} from "react-dom/test-utils";
 import {get} from "../../api/api";
 import Ideas from "./ideas";
 
+jest.mock("../../api/api");
+
 let container = null;
 
-jest.mock("../../api/api");
 
 jest.mock("./idea", () => {
     return function render() {
@@ -49,13 +50,10 @@ describe("Ideas", () => {
 
     });
 
-    it("renders with data", () => {
+    it("renders with data", async () => {
+        await get.mockResolvedValue(data);
 
-        get.mockImplementation((resource, handleSuccess, handleFailure) => {
-            handleSuccess(data);
-        });
-
-        act(() => {
+        await act(async () => {
             render(<Ideas/>, container);
         });
 
@@ -71,16 +69,13 @@ describe("Ideas", () => {
         })
     });
 
-    it("renders without data", () => {
+    it("renders without data", async () => {
 
-        get.mockImplementation((resource, handleSuccess, handleFailure) => {
-            handleSuccess([]);
-        });
+        await get.mockResolvedValue([]);
 
-        act(() => {
+        await act(async () => {
             render(<Ideas/>, container);
         });
-
 
         expect(get).toHaveBeenCalledTimes(1);
         expect(container.querySelector("h2").textContent).toBe("List of Ideas");

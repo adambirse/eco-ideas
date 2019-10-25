@@ -20,12 +20,17 @@ class IdeaForm extends Component {
         this.setState({text: e.target.value});
     };
 
-    handleSubmit = (e) => {
-        this.postIdea(this.title.value, this.state.text);
-        e.preventDefault();
+    handleSubmit = async (e) => {
+        try {
+            e.preventDefault();
+            await this.postIdea(this.title.value, this.state.text);
+            this.handleSuccess();
+        } catch (exception) {
+            this.handleServerError(exception.response);
+        }
     };
 
-    handleSuccess = ()  => {
+    handleSuccess = () => {
         this.setState(() => ({
             toDashboard: true
         }));
@@ -45,8 +50,8 @@ class IdeaForm extends Component {
         }
     };
 
-    postIdea = (title, text) => {
-        securePost({title: title, text: text},"ideas",  this.handleSuccess,  this.handleServerError);
+    postIdea = async (title, text) => {
+        await securePost({title: title, text: text}, "ideas", this.handleSuccess, this.handleServerError);
     };
 
     render() {

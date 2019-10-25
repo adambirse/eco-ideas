@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom'
 import ErrorMessage from "../error/error-message";
 import {securePost} from "../../api/api";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import addRole from "../../actions/actions";
 
 class LoginForm extends Component {
@@ -50,12 +50,17 @@ class LoginForm extends Component {
         }));
     };
 
-    login = (email_address, password) => {
+    login = async (email_address, password) => {
 
-        securePost({
-            email_address: email_address,
-            password: password
-        },"authenticate",  this.handleSuccess,  this.handleServerError);
+        try {
+            await securePost({
+                email_address: email_address,
+                password: password
+            }, "authenticate");
+            this.handleSuccess();
+        } catch (exception) {
+            this.handleServerError(exception.response);
+        }
     };
 
     render() {

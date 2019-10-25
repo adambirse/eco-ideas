@@ -20,10 +20,15 @@ class RegisterForm extends Component {
         this.setState({email_address: e.target.value});
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
         this.clearErrors();
-        this.register(this.state.email_address);
+        try {
+            await this.register(this.state.email_address);
+            this.handleSuccess();
+        } catch (exception) {
+            this.handleServerError(exception.response);
+        }
     };
 
     clearErrors() {
@@ -51,10 +56,10 @@ class RegisterForm extends Component {
         }
     };
 
-    register = (email_address) => {
-        post({
+    register = async (email_address) => {
+        return await post({
             email_address: email_address
-        },"register/",  this.handleSuccess,  this.handleServerError);
+        }, "register/");
     };
 
     render() {
@@ -74,9 +79,9 @@ class RegisterForm extends Component {
     getForm() {
         return <form onSubmit={this.handleSubmit}>
             <label htmlFor={"email"}>Email:</label>
-            <input id= "email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
+            <input id="email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
                    className={"text"}/>
-            <input value="submit" type="submit"  className={"submit"}/>
+            <input value="submit" type="submit" className={"submit"}/>
         </form>;
     }
 

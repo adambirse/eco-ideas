@@ -33,18 +33,27 @@ class IdeaList extends Component {
     };
 
     handleSuccess = (data) => {
+
         this.setState({
-                list: data,
-                filteredList: data
-            });
+            list: data,
+            filteredList: data
+        });
     };
 
     handleError = (error) => {
         console.log(error);
     };
 
-    getList = () => {
-        get('ideas', this.handleSuccess, this.handleError);
+    getList = async () => {
+        try {
+            const data = await get('ideas');
+            this.setState({
+                list: data,
+                filteredList: data
+            });
+        } catch (exception) {
+            this.handleError(exception);
+        }
     };
 
     render() {
