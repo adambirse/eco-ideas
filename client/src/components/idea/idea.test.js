@@ -10,7 +10,6 @@ jest.mock("./idea-details", () => {
     return function render(props) {
         return (
             <div>
-                {/*<p>Mocked Idea Details</p>*/}
                 <p>{props.text}</p>
             </div>
         );
