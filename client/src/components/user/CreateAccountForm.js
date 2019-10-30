@@ -57,13 +57,20 @@ class CreateAccountForm extends Component {
         }
     };
 
-    register = (email_address, password, invite_hash) => {
-        securePost({
-            email_address: email_address,
-            password: password,
-            invite_hash: invite_hash
+    register = async (email_address, password, invite_hash) => {
+        try {
+            const result = await securePost({
+                email_address: email_address,
+                password: password,
+                invite_hash: invite_hash
 
-        }, "create-account/", this.handleSuccess, this.handleServerError);
+            }, "create-account/");
+            this.handleSuccess();
+        } catch (e) {
+            console.log(e);
+            this.handleServerError(e.response);
+
+        }
     };
 
     render() {
@@ -84,11 +91,11 @@ class CreateAccountForm extends Component {
         return <form onSubmit={this.handleSubmit}>
             <label htmlFor={"email"}>Email:</label>
             <input id="email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
-                   className={"text"}/>
+                   className={"text"} placeholder={"email"}/>
             <label htmlFor={"password"}>Password:</label>
             <input id="password" type="password" value={this.state.password} onChange={this.handlePasswordChange}
-                   className={"text"}/>
-            <input type="submit" value="submit" className={"submit"}/>
+                   className={"text"} placeholder={"password"}/>
+            <input type="submit" name="submit" value="submit" className={"submit"}/>
         </form>;
     }
 
