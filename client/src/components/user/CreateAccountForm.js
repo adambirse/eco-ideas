@@ -59,7 +59,7 @@ class CreateAccountForm extends Component {
 
     register = async (email_address, password, invite_hash) => {
         try {
-            const result = await securePost({
+            await securePost({
                 email_address: email_address,
                 password: password,
                 invite_hash: invite_hash
