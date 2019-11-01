@@ -12,7 +12,6 @@ let container = null;
 
 jest.mock("../error/error-message", () => {
     return function render(props) {
-        expect(props.error).toBe("page not found");
         return (
             <div>
                 <p>{props.error}</p>
@@ -23,7 +22,6 @@ jest.mock("../error/error-message", () => {
 
 jest.mock("../validation/validation-panel", () => {
     return function render(props) {
-        expect(props.messages).toBe("validation errors");
         return (
             <div>
                 <p>{props.messages}</p>
@@ -68,10 +66,9 @@ describe("RegisterForm", () => {
             render(<MemoryRouter>
                 <RegisterForm/>
             </MemoryRouter>, container);
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
-
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
 
         expect(post).toHaveBeenCalledTimes(1);
 
@@ -93,11 +90,11 @@ describe("RegisterForm", () => {
             render(<MemoryRouter>
                 <RegisterForm/>
             </MemoryRouter>, container);
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
-
+        expect(container.getElementsByTagName("p")[0].textContent).toBe("validation errors");
         expect(post).toHaveBeenCalledTimes(1);
 
     });
@@ -116,12 +113,12 @@ describe("RegisterForm", () => {
             render(<MemoryRouter>
                 <RegisterForm/>
             </MemoryRouter>, container);
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
 
-
+        expect(container.getElementsByTagName("p")[0].textContent).toBe("page not found");
         expect(post).toHaveBeenCalledTimes(1);
 
     });

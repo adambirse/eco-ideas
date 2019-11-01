@@ -14,7 +14,6 @@ let container = null;
 
 jest.mock("../error/error-message", () => {
     return function render(props) {
-        expect(props.error).toBe("could not create account");
         return (
             <div>
                 <p>{props.error}</p>
@@ -25,7 +24,6 @@ jest.mock("../error/error-message", () => {
 
 jest.mock("../validation/validation-panel", () => {
     return function render(props) {
-        expect(props.messages).toBe("authentication errors");
         return (
             <div>
                 <p>{props.messages}</p>
@@ -74,10 +72,9 @@ describe("LoginForm", () => {
                 <ConnectedLoginForm/>
                 </MemoryRouter>
             </Provider>,container);
-        });
-
         const submitButton = document.querySelector('input[name="submit"]');
         submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+        });
 
         expect(securePost).toHaveBeenCalledTimes(1);
 
@@ -97,11 +94,11 @@ describe("LoginForm", () => {
 
         await act(async () => {
             render(<LoginForm/>,container);
+            const submitButton = container.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
-
+        expect(container.getElementsByTagName("p")[0].textContent).toBe("could not create account");
         expect(securePost).toHaveBeenCalledTimes(1);
 
     });
