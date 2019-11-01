@@ -5,7 +5,7 @@ import {securePost} from "../../api/api";
 import {connect} from "react-redux";
 import addRole from "../../actions/actions";
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
 
     constructor(props) {
         super(props);
@@ -80,11 +80,11 @@ class LoginForm extends Component {
         return <form onSubmit={this.handleSubmit}>
             <label htmlFor={"email"}>Email:</label>
             <input id="email" type="text" value={this.state.email_address} onChange={this.handleEmailChange}
-                   className={"text"}/>
+                   className={"text"} placeholder={'email'}/>
             <label htmlFor={"password"}>Password:</label>
             <input id="password" type="password" value={this.state.password} onChange={this.handlePasswordChange}
-                   className={"text"}/>
-            <input value="submit" type="submit" className={"submit"}/>
+                   className={"text"} placeholder={'password'}/>
+            <input value="submit" type="submit" className={"submit"} name={'submit'}/>
         </form>;
     }
 
@@ -100,5 +100,6 @@ class LoginForm extends Component {
 const mapDispatchToProps = dispatch => ({
     addRole: (payload) => dispatch(addRole(payload))
 });
+
 
 export default connect(null, mapDispatchToProps)(LoginForm);

@@ -22,7 +22,11 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "collectCoverageFrom" : ["src/**/*.js", "!src/index.js","!src/serviceWorker.js"]
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/serviceWorker.js"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,6 +44,7 @@
     ]
   },
   "devDependencies": {
-    "jest-junit": "^8.0.0"
+    "jest-junit": "^8.0.0",
+    "redux-mock-store": "^1.5.3"
   }
 }

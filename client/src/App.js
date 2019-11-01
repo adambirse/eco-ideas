@@ -8,7 +8,7 @@ import NavBar from "./components/navbar"
 import IdeaList from "./components/idea/ideas";
 import Admin from "./components/admin/admin";
 import About from "./components/about/about";
-import LoginForm from "./components/user/login";
+import LoginForm from "./components/user/LoginForm";
 import RegisterForm from "./components/user/RegisterForm";
 import CreateAccountForm from "./components/user/CreateAccountForm";
 
