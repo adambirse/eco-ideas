@@ -47,6 +47,9 @@ class IdeaForm extends Component {
             }));
         } else {
             console.log(response);
+            this.setState(() => ({
+                error: response.data
+            }));
         }
     };
 
@@ -71,10 +74,11 @@ class IdeaForm extends Component {
 
     getForm() {
         return <form onSubmit={this.handleSubmit}>
-            <label>Title:</label>
-            <input type="text" ref={(value) => this.title = value} size={50} className={"text"}/>
-            <label>Text:</label>
-            <textarea value={this.state.text} onChange={this.handleChange} rows={5}/>
+            <label htmlFor={"title"}>Title:</label>
+            <input type="text" ref={(value) => this.title = value} size={50} className={"text"} id={"title"}
+                   placeholder={'title'}/>
+            <label htmlFor={"text"}>Text:</label>
+            <textarea value={this.state.text} onChange={this.handleChange} rows={5} id={"text"} placeholder={'text'}/>
             <input type="submit" value="submit" className={"submit"}/>
         </form>;
     }
