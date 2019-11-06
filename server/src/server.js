@@ -14,19 +14,10 @@ const db = require("./models");
 
 const errorController = require('./controllers/errorController');
 
-
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('combined'));
 app.use(cookieParser());
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", allowedOrigins);
-    res.header('Access-Control-Allow-Credentials', true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
 
 app.use(ideaRouter);
 app.use(registrationRouter);
@@ -44,7 +35,6 @@ db.sequelize
         app.listen(port, () => {
             console.log('App is listening on port ' + port);
         });
-
     })
     .catch(err => {
         console.log(err);

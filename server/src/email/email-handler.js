@@ -1,6 +1,5 @@
 const sgMail = require('@sendgrid/mail');
 
-
 const registration_endpoint = process.env.REGISTRATION_ENDPOINT || 'http://localhost:3000/create-account';
 const sender_email = process.env.SENDER_EMAIL || 'eco-ideas.com';
 const valid_admin_email_address = process.env.VALID_ADMIN_EMAIL_ADDRESS || 'admin@eco-ideas.com';

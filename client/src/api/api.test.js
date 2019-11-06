@@ -17,7 +17,7 @@ it("test get success", async () => {
 
     expect(result).toBe(data);
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:5000/api/resource");
+    expect(axios.get).toHaveBeenCalledWith("/api/resource");
 
 });
 
@@ -34,7 +34,7 @@ it("test get failure", async () => {
     }
 
     expect(axios.get).toHaveBeenCalledTimes(1);
-    expect(axios.get).toHaveBeenCalledWith("http://localhost:5000/api/resource");
+    expect(axios.get).toHaveBeenCalledWith("/api/resource");
 
 });
 
@@ -48,7 +48,7 @@ it("test post success", async () => {
 
     expect(result.status).toBe(200);
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/api/resource",data);
+    expect(axios.post).toHaveBeenCalledWith("/api/resource",data);
 
 });
 
@@ -64,7 +64,7 @@ it("test post failure", async () => {
     }
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/api/resource",data);
+    expect(axios.post).toHaveBeenCalledWith("/api/resource",data);
 
 });
 
@@ -78,7 +78,7 @@ it("test secure post success", async () => {
 
     expect(result.status).toBe(200);
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/api/resource",data, {
+    expect(axios.post).toHaveBeenCalledWith("/api/resource",data, {
         withCredentials: true
     });
 
@@ -96,7 +96,7 @@ it("test secure post failure", async () => {
     }
 
     expect(axios.post).toHaveBeenCalledTimes(1);
-    expect(axios.post).toHaveBeenCalledWith("http://localhost:5000/api/resource",data, {
+    expect(axios.post).toHaveBeenCalledWith("/api/resource",data, {
         withCredentials: true
     });
 

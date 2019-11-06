@@ -28,8 +28,8 @@ class CreateAccountForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         this.clearErrors();
-        const invite_hash = this.props.location.pathname.split("/").pop();
-        this.register(this.state.email_address, this.state.password, invite_hash);
+        const { hash } = this.props.match.params;
+        this.register(this.state.email_address, this.state.password, hash);
     };
 
     clearErrors() {
