@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 cd $(dirname "$0")
-pwd
 docker rmi server gcr.io/eco-ideas/server
 docker build -t server .
 docker tag server gcr.io/eco-ideas/server

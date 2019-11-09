@@ -39,18 +39,14 @@ Do this to save money!
 ### Kubernetes
 
 - `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
-- `./server/build-for-gcp.sh`
+- update server-config with registration endpoint (http://34.89.80.93:80/create-account) --TODO automate
+- create `server-email-config.yml` based on `server-email-config.yml.EXAMPLE` containing your send grid configuration
+
 - `./server/deploy-service-for-gcp.sh`
 - `./client/deploy-service-for-gcp.sh`
-- `watch kubectl get svc` to get ip server and client ip address, 
-- `./client/build-for-gcp.sh <SERVER_IP_ADDRESS>`
+- `kubectl apply -f kubernetes/ingress.yml`
+- `./server/build-for-gcp.sh`
+- `./client/build-for-gcp.sh`
 - `./client/deploy-deployment-for-gcp.sh`
-- update server-config with client ip (http://34.89.80.93:80) and registration endpoint (http://34.89.80.93:80/create-account) --TODO automate
-- create `server-email-config.yml` based on `server-email-config.yml.EXAMPLE` containing your send grid configuration
 - `./server/deploy-config-for-gcp.sh`
 - `./server/deploy-deployment-for-gcp.sh`
-- http://CLIENT-IP
-
-
-
-

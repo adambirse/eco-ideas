@@ -41,11 +41,6 @@ spec:
                 secretKeyRef:
                   name: config
                   key: database_name
-            - name: ALLOWED_ORIGINS
-              valueFrom:
-                configMapKeyRef:
-                  name: server-config
-                  key: allowed_origins
             - name: REGISTRATION_ENDPOINT
               valueFrom:
                 configMapKeyRef:

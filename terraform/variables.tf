@@ -63,14 +63,10 @@ variable database_password {
 }
 
 // GCP Outputs
-output "gcp_cluster_endpoint" {
-  value = google_container_cluster.gcp_kubernetes.endpoint
-}
-
-output "gcp_cluster_name" {
-  value = google_container_cluster.gcp_kubernetes.name
-}
-
 output "sql_private_ip" {
   value = google_sql_database_instance.eco-ideas.private_ip_address
+}
+
+output "static_ip" {
+  value = google_compute_global_address.default.address
 }

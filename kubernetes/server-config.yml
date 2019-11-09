@@ -3,6 +3,4 @@ apiVersion: v1
 metadata:
   name: server-config
 data:
-  # TODO automate
-  allowed_origins: http://<CLIENT_IP>
-  registration_endpoint: http://CLIENT_IP/create-account
+  registration_endpoint: http://<IP>/create-account

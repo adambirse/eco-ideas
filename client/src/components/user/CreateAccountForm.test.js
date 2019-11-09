@@ -60,16 +60,14 @@ describe("CreateAccountForm", () => {
 
     it("create account success", async () => {
 
-        const location = {pathname: '/create-account/'};
-
         await securePost.mockResolvedValue({status: 200});
 
         await act(async () => {
             render(<MemoryRouter>
-                <CreateAccountForm location={location}/>
+                <CreateAccountForm match={{params: {hash: 1}, isExact: true, path: "", url: ""}}/>
             </MemoryRouter>, container);
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
         expect(securePost).toHaveBeenCalledTimes(1);
@@ -78,7 +76,6 @@ describe("CreateAccountForm", () => {
 
     it("create account authentication failure", async () => {
 
-        const location = {pathname: '/create-account/'};
 
         await securePost.mockRejectedValue({
             response: {
@@ -91,10 +88,10 @@ describe("CreateAccountForm", () => {
 
         await act(async () => {
             render(<MemoryRouter>
-                <CreateAccountForm location={location}/>
+                <CreateAccountForm match={{params: {hash: 1}, isExact: true, path: "", url: ""}}/>
             </MemoryRouter>, container);
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
         expect(container.getElementsByTagName("p")[0].textContent).toBe("authentication errors");
@@ -103,8 +100,6 @@ describe("CreateAccountForm", () => {
     });
 
     it("create account 404 failure", async () => {
-
-        const location = {pathname: '/create-account/'};
 
         await securePost.mockRejectedValue({
             response: {
@@ -115,10 +110,10 @@ describe("CreateAccountForm", () => {
 
         await act(async () => {
             render(<MemoryRouter>
-                <CreateAccountForm location={location}/>
+                <CreateAccountForm match={{params: {hash: 1}, isExact: true, path: "", url: ""}}/>
             </MemoryRouter>, container);
-        const submitButton = document.querySelector('input[name="submit"]');
-        submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
+            const submitButton = document.querySelector('input[name="submit"]');
+            submitButton.dispatchEvent(new MouseEvent("click", {bubbles: true}));
         });
 
         expect(container.getElementsByTagName("p")[0].textContent).toBe("page not found");

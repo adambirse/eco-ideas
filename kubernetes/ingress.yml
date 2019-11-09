@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: test-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: eco-ideas-ip
+spec:
+  rules:
+    - host: my-host
+    - http:
+        paths:
+          - path: /api/*
+            backend:
+              serviceName: backend
+              servicePort: 5000
+          - path: /*
+            backend:
+              serviceName: frontend
+              servicePort: 80
