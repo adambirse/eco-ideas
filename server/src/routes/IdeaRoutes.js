@@ -7,20 +7,20 @@ const withAuth = require('../middleware/middleware');
 const ideaRouter = express.Router();
 
 ideaRouter.post('/api/ideas/', withAuth, [
-    check('title').not().isEmpty().withMessage('Title must not be empty.'),
-    check('text').not().isEmpty().withMessage('Text must not be empty.'),
+  check('title').not().isEmpty().withMessage('Title must not be empty.'),
+  check('text').not().isEmpty().withMessage('Text must not be empty.'),
 ], (req, res) => {
 
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({errors: errors.array()});
-    } else {
-        ideaController.add(req, res);
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
+  } else {
+    ideaController.add(req, res);
+  }
 });
 
-ideaRouter.get('/api/ideas/',  (req, res) => {
-    ideaController.findAll(req, res);
+ideaRouter.get('/api/ideas/', (req, res) => {
+  ideaController.findAll(req, res);
 });
 
 module.exports = ideaRouter;

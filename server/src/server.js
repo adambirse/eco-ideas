@@ -1,16 +1,15 @@
 const morgan = require('morgan');
 const express = require('express');
-const bodyParser = require("body-parser");
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const app = express();
 
 import 'dotenv/config';
-const allowedOrigins = process.env.ALLOWED_ORIGINS || "http://localhost:3000";
 
 const ideaRouter = require('./routes/IdeaRoutes');
 const registrationRouter = require('./routes/RegistrationRoutes');
 
-const db = require("./models");
+const db = require('./models');
 
 const errorController = require('./controllers/errorController');
 
@@ -24,18 +23,18 @@ app.use(registrationRouter);
 
 // Handles any requests that don't match the ones above
 app.get('*', (req, res) => {
-    errorController.get404(req,res);
+  errorController.get404(req, res);
 });
 
 
 db.sequelize
-    .sync()
-    .then(result => {
-        const port = process.env.PORT || 5000;
-        app.listen(port, () => {
-            console.log('App is listening on port ' + port);
-        });
-    })
-    .catch(err => {
-        console.log(err);
+  .sync()
+  .then(result => {
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log('App is listening on port ' + port);
     });
+  })
+  .catch(err => {
+    console.log(err);
+  });

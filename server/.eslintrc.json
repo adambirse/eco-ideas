@@ -1,0 +1,16 @@
+{
+  "extends": "strongloop",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2017
+  },
+
+  "env": {
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
+    "strict": [1, "safe"]
+  }
+}

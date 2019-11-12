@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
+    "pretest": "eslint --fix --ignore-path ../.gitignore .",
     "test": "nyc --check-coverage --lines 80 --reporter=text mocha ./tests --recursive --require @babel/register",
     "start": "nodemon --exec babel-node src/server.js",
     "start-prod": "node build/server.js",
@@ -31,6 +32,8 @@
     "@babel/node": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "chai": "^4.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-strongloop": "^2.1.0",
     "mocha": "^6.2.0",
     "nodemon": "^1.19.1",
     "nyc": "^14.1.1",

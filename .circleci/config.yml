@@ -17,6 +17,10 @@ jobs:
           command: docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eco -e MYSQL_USER=user -e MYSQL_PASSWORD=password -p 3310:3306 -d mysql:5.7
           working_directory: server
       - run:
+          name: create-network
+          command: docker network create eco
+          working_directory: client
+      - run:
           name: start-client
           command: ./deploy-for-local.sh
           working_directory: client

@@ -1,245 +1,245 @@
 const chai = require('chai');
 const {stub, resetHistory} = require('sinon');
 const proxyquire = require('proxyquire');
-const sinonChai = require("sinon-chai");
+const sinonChai = require('sinon-chai');
 chai.should();
 chai.use(sinonChai);
 
 const {makeMockModels} = require('sequelize-test-helpers');
 
-describe('Registration Controller', function () {
+describe('Registration Controller', function() {
 
-    let User;
-    let Invite;
-    let registrationController;
-    let fakeUser;
-    let fakeInvite;
-    let jwt_utils = {
-        generateToken: stub(),
-        verify: stub(),
-        '@noCallThru': true,
-    };
-    const email_handler_stub = {
-        sendEmail: stub(),
-        checkEmail: stub()
-    };
+  let User;
+  let Invite;
+  let registrationController;
+  let fakeUser;
+  let fakeInvite;
+  let jwt_utils = {
+    generateToken: stub(),
+    verify: stub(),
+    '@noCallThru': true,
+  };
+  const email_handler_stub = {
+    sendEmail: stub(),
+    checkEmail: stub(),
+  };
 
-    User = {findOne: stub(), create: stub()};
-    Invite = {findOne: stub(), create: stub()};
+  User = {findOne: stub(), create: stub()};
+  Invite = {findOne: stub(), create: stub()};
 
-    const mockModels = makeMockModels({User, Invite});
-    fakeUser = {validPassword: stub()};
+  const mockModels = makeMockModels({User, Invite});
+  fakeUser = {validPassword: stub()};
 
-    fakeUser = {validPassword: stub()};
-    fakeInvite = {update: stub()};
+  fakeUser = {validPassword: stub()};
+  fakeInvite = {update: stub()};
 
-    beforeEach(function () {
+  beforeEach(function() {
 
-        registrationController = proxyquire('../../src/controllers/registrationController', {
-            '../models': mockModels,
-            '../middleware/jwt': jwt_utils,
-            '../email/email-handler': email_handler_stub
-        });
+    registrationController = proxyquire('../../src/controllers/registrationController', {
+      '../models': mockModels,
+      '../middleware/jwt': jwt_utils,
+      '../email/email-handler': email_handler_stub,
+    });
+  });
+
+  afterEach(resetHistory);
+
+  it('User already exists ', async function() {
+
+    const req = createRequest('alreadyexists@test.com');
+
+    const status = stub();
+    const json = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(422);
+      return res;
+    });
+    json.callsFake(() => {
+      json.should.have.been.calledWithMatch({
+        errors: [{
+          value: 'email_address',
+          msg: 'Invalid email address. User already exists.',
+          param: 'email_address',
+          location: 'body',
+        }],
+      });
     });
 
-    afterEach(resetHistory);
+    const res = {status: status, json: json};
 
-    it('User already exists ', async function () {
+    Invite.findOne.resolves(fakeInvite);
+    User.findOne.resolves(fakeUser);
 
-        const req = createRequest('alreadyexists@test.com');
+    await registrationController.create(req, res);
+    User.findOne.should.have.been.called;
+    Invite.findOne.should.have.been.called;
+    User.create.should.not.have.been.called;
 
-        const status = stub();
-        const json = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(422);
-            return res;
-        });
-        json.callsFake(() => {
-            json.should.have.been.calledWithMatch({
-                errors: [{
-                    "value": "email_address",
-                    "msg": "Invalid email address. User already exists.",
-                    "param": "email_address",
-                    "location": "body"
-                }]
-            });
-        });
+  });
 
-        const res = {status: status, json: json};
+  it('User successfully created ', async() => {
 
-        Invite.findOne.resolves(fakeInvite);
-        User.findOne.resolves(fakeUser);
+    const req = createRequest('doesnotexist@test.com');
 
-        await registrationController.create(req, res);
-        User.findOne.should.have.been.called;
-        Invite.findOne.should.have.been.called;
-        User.create.should.not.have.been.called;
-
+    const status = stub();
+    const send = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(200);
+      return res;
+    });
+    send.callsFake(() => {
+      send.should.have.been.calledWithMatch('successfully created an account.');
     });
 
-    it('User successfully created ', async () => {
+    const res = {status: status, send: send};
 
-        const req = createRequest('doesnotexist@test.com');
+    Invite.findOne.resolves(fakeInvite);
+    User.findOne.resolves(undefined);
+    User.create.resolves(fakeUser);
 
-        const status = stub();
-        const send = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(200);
-            return res;
-        });
-        send.callsFake(() => {
-            send.should.have.been.calledWithMatch("successfully created an account.");
-        });
+    await registrationController.create(req, res);
 
-        const res = {status: status, send: send};
+    Invite.findOne.should.have.been.called;
+    User.findOne.should.have.been.called;
+    User.create.should.have.been.calledWith(req.body);
+  });
 
-        Invite.findOne.resolves(fakeInvite);
-        User.findOne.resolves(undefined);
-        User.create.resolves(fakeUser);
+  it('Register Invalid email', async() => {
 
-        await registrationController.create(req, res);
+    const req = createRequest('invalid-email@test.com');
 
-        Invite.findOne.should.have.been.called;
-        User.findOne.should.have.been.called;
-        User.create.should.have.been.calledWith(req.body);
+    const status = stub();
+    const json = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(422);
+      return res;
+    });
+    json.callsFake(() => {
+      json.should.have.been.calledWithMatch({
+        errors: [{
+          value: 'email_address',
+          msg: 'Invalid email address. Please choose a valid one.',
+          param: 'email_address',
+          location: 'body',
+        }],
+      });
     });
 
-    it('Register Invalid email', async () => {
+    const res = {status: status, json: json};
+    await registrationController.register(req, res);
+  });
 
-        const req = createRequest('invalid-email@test.com');
+  it('Register valid email', async() => {
 
-        const status = stub();
-        const json = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(422);
-            return res;
-        });
-        json.callsFake(() => {
-            json.should.have.been.calledWithMatch({
-                errors: [{
-                    "value": "email_address",
-                    "msg": "Invalid email address. Please choose a valid one.",
-                    "param": "email_address",
-                    "location": "body"
-                }]
-            });
-        });
+    const req = createRequest('admin@eco-ideas.com');
 
-        const res = {status: status, json: json};
-        await registrationController.register(req, res);
+    const status = stub();
+    const send = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(200);
+      return res;
+    });
+    send.callsFake(() => {
+      send.should.have.been.calledWithMatch('successfully registered.');
     });
 
-    it('Register valid email', async () => {
+    email_handler_stub.checkEmail.returns(true);
+    Invite.create.resolves(fakeInvite);
 
-        const req = createRequest('admin@eco-ideas.com');
+    const res = {status: status, send: send};
+    await registrationController.register(req, res);
 
-        const status = stub();
-        const send = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(200);
-            return res;
-        });
-        send.callsFake(() => {
-            send.should.have.been.calledWithMatch("successfully registered.");
-        });
+    email_handler_stub.sendEmail.should.have.been.called;
+    Invite.create.should.have.been.called;
+    fakeInvite.update.should.have.been.called;
 
-        email_handler_stub.checkEmail.returns(true);
-        Invite.create.resolves(fakeInvite);
+  });
 
-        const res = {status: status, send: send};
-        await registrationController.register(req, res);
+  it('Authenticate - user does not exist', async() => {
 
-        email_handler_stub.sendEmail.should.have.been.called;
-        Invite.create.should.have.been.called;
-        fakeInvite.update.should.have.been.called;
+    const req = createRequest('admin@eco-ideas.com');
 
+    const status = stub();
+    const json = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(401);
+      return res;
+    });
+    json.callsFake(() => {
+      json.should.have.been.calledWithMatch({
+        error: 'Incorrect email or password',
+      });
     });
 
-    it('Authenticate - user does not exist', async () => {
+    User.findOne.resolves(undefined);
 
-        const req = createRequest('admin@eco-ideas.com');
+    const res = {status: status, json: json};
+    await registrationController.authenticate(req, res);
 
-        const status = stub();
-        const json = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(401);
-            return res;
-        });
-        json.callsFake(() => {
-            json.should.have.been.calledWithMatch({
-                error: 'Incorrect email or password'
-            });
-        });
+    User.findOne.should.have.been.called;
 
-        User.findOne.resolves(undefined);
+  });
 
-        const res = {status: status, json: json};
-        await registrationController.authenticate(req, res);
+  it('Authenticate -incorrect password', async() => {
 
-        User.findOne.should.have.been.called;
+    const req = createRequest('test@eco-ideas.com');
 
+    const status = stub();
+    const json = stub();
+    status.callsFake(() => {
+      status.should.have.been.calledWithMatch(401);
+      return res;
+    });
+    json.callsFake(() => {
+      json.should.have.been.calledWithMatch({
+        error: 'Incorrect email or password',
+      });
     });
 
-    it('Authenticate -incorrect password', async () => {
+    User.findOne.resolves(fakeUser);
+    fakeUser.validPassword.returns(false);
 
-        const req = createRequest('test@eco-ideas.com');
+    const res = {status: status, json: json};
+    await registrationController.authenticate(req, res);
 
-        const status = stub();
-        const json = stub();
-        status.callsFake(() => {
-            status.should.have.been.calledWithMatch(401);
-            return res;
-        });
-        json.callsFake(() => {
-            json.should.have.been.calledWithMatch({
-                error: 'Incorrect email or password'
-            });
-        });
+    User.findOne.should.have.been.called;
 
-        User.findOne.resolves(fakeUser);
-        fakeUser.validPassword.returns(false);
+  });
 
-        const res = {status: status, json: json};
-        await registrationController.authenticate(req, res);
+  it('Authenticate - success', async() => {
 
-        User.findOne.should.have.been.called;
+    const req = createRequest('test@eco-ideas.com');
 
+    const cookie = stub();
+    const sendStatus = stub();
+    sendStatus.callsFake(() => {
+      sendStatus.should.have.been.calledWithMatch(200);
+      return res;
+    });
+    cookie.callsFake(() => {
+      cookie.should.have.been.calledWithMatch('token', 'token', {httpOnly: true});
+      return res;
     });
 
-    it('Authenticate - success', async () => {
 
-        const req = createRequest('test@eco-ideas.com');
+    User.findOne.resolves(fakeUser);
+    fakeUser.validPassword.returns(true);
+    jwt_utils.generateToken.returns('token');
 
-        const cookie = stub();
-        const sendStatus = stub();
-        sendStatus.callsFake(() => {
-            sendStatus.should.have.been.calledWithMatch(200);
-            return res;
-        });
-        cookie.callsFake(() => {
-            cookie.should.have.been.calledWithMatch('token', 'token', {httpOnly: true});
-            return res;
-        });
+    const res = {sendStatus: sendStatus, cookie: cookie};
+    await registrationController.authenticate(req, res);
 
+    User.findOne.should.have.been.called;
 
-        User.findOne.resolves(fakeUser);
-        fakeUser.validPassword.returns(true);
-        jwt_utils.generateToken.returns('token');
-
-        const res = {sendStatus: sendStatus, cookie: cookie};
-        await registrationController.authenticate(req, res);
-
-        User.findOne.should.have.been.called;
-
-    });
+  });
 
 });
 
 const createRequest = (email) => {
-    return {
-        body: {
-            email_address: email,
-            password: 'password'
-        }
-    };
+  return {
+    body: {
+      email_address: email,
+      password: 'password',
+    },
+  };
 };
