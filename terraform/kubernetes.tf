@@ -1,7 +1,7 @@
 
 resource "google_container_cluster" "gcp_kubernetes" {
   name = var.cluster_name
-  location = var.region
+  location = var.zone
   initial_node_count = var.gcp_cluster_count
   network = var.network
 

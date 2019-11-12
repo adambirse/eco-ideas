@@ -25,7 +25,7 @@ Webpack, Babel on both projects.
 - `terraform init`
 - `terraform plan`
 - `tetrraform apply`
-- `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas` (WORKAROUND TO GET SECRETS INJECTED - FIX PROPERLY)
+- `gcloud container clusters get-credentials ecoideas --zone europe-west2-a --project eco-ideas` (WORKAROUND TO GET SECRETS INJECTED - FIX PROPERLY)
 - `kubectl config current-context`
 - `tetrraform apply`
 
@@ -39,14 +39,7 @@ Do this to save money!
 ### Kubernetes
 
 - `gcloud container clusters get-credentials ecoideas --zone europe-west2 --project eco-ideas`
-- update server-config with registration endpoint (http://34.89.80.93:80/create-account) --TODO automate
 - create `server-email-config.yml` based on `server-email-config.yml.EXAMPLE` containing your send grid configuration
 
-- `./server/deploy-service-for-gcp.sh`
-- `./client/deploy-service-for-gcp.sh`
-- `kubectl apply -f kubernetes/ingress.yml`
-- `./server/build-for-gcp.sh`
-- `./client/build-for-gcp.sh`
-- `./client/deploy-deployment-for-gcp.sh`
-- `./server/deploy-config-for-gcp.sh`
-- `./server/deploy-deployment-for-gcp.sh`
+- `./deploy.sh`
+

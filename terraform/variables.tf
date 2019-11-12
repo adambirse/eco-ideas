@@ -27,6 +27,12 @@ variable region {
   default = "europe-west2"
 }
 
+variable zone {
+  type = "string"
+  description = "zone to use."
+  default = "europe-west2-a"
+}
+
 variable network {
   type = "string"
   description = "private network to use"

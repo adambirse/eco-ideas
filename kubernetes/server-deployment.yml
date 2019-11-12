@@ -20,6 +20,11 @@ spec:
       containers:
         - name: eco-ideas-server
           image: gcr.io/eco-ideas/server:latest
+          resources:
+            requests:
+              cpu: "70m"
+            limits:
+              cpu: "100m"
           env:
             - name: DATABASE_HOST
               valueFrom:
@@ -41,11 +46,21 @@ spec:
                 secretKeyRef:
                   name: config
                   key: database_name
-            - name: REGISTRATION_ENDPOINT
+            - name: SERVER_SCHEME
               valueFrom:
                 configMapKeyRef:
                   name: server-config
-                  key: registration_endpoint
+                  key: server_scheme
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: server-config
+                  key: server_port
+            - name: SERVER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  name: server-config
+                  key: server_address
             - name: DATABASE_PORT
               value: "3306"
             - name: SECRET

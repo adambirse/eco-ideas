@@ -1,6 +1,8 @@
 const sgMail = require('@sendgrid/mail');
 
-const registration_endpoint = process.env.REGISTRATION_ENDPOINT || 'http://localhost/create-account';
+const server_scheme = process.env.SERVER_SCHEME || 'http';
+const server_port = process.env.SERVER_PORT || '3000';
+const server_address = process.env.SERVER_ADDRESS || 'localhost';
 const sender_email = process.env.SENDER_EMAIL || 'eco-ideas.com';
 const valid_admin_email_address = process.env.VALID_ADMIN_EMAIL_ADDRESS || 'admin@eco-ideas.com';
 const api_key = process.env.API_KEY;
@@ -9,10 +11,11 @@ sgMail.setApiKey(api_key);
 
 exports.sendEmail = async (email_address, uuid) => {
 
-    const registration_url = `${registration_endpoint}/${uuid}`;
+    const registration_url = `${server_scheme}://${server_address}:${server_port}/create-account/${uuid}`;
+
     const body = `
     <h1>Please create an account</h1>
-    <p>Click <a href="${registration_url}">here<a/> to create your account and finish the registration process</p>`;
+    <p>Click <a href=${registration_url}>here<a/> to create your account and finish the registration process</p>`;
 
     const text = `Go to ${registration_url} to create your account and finish the registration process`;
 
