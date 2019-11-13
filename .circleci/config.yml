@@ -13,6 +13,10 @@ jobs:
           command: ./build-for-local.sh
           working_directory: server
       - run:
+          name: build-nginx
+          command: ./build-for-local.sh
+          working_directory: nginx
+      - run:
           name: start-database
           command: docker run --name mysql -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=eco -e MYSQL_USER=user -e MYSQL_PASSWORD=password -p 3310:3306 -d mysql:5.7
           working_directory: server
@@ -28,6 +32,10 @@ jobs:
           name: start-server
           command: ./deploy-for-local.sh
           working_directory: server
+      - run:
+          name: start-nginx
+          command: ./deploy-for-local.sh
+          working_directory: nginx
       - run:
           name: install-test-dependencies
           command: npm install
