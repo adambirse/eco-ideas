@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Route, Switch} from 'react-router-dom'
 
-import './App.css';
+import './scss/App.scss';
 import Header from "./components/header"
 import Footer from "./components/footer"
 import NavBar from "./components/navbar"
@@ -15,7 +15,7 @@ import CreateAccountForm from "./components/user/CreateAccountForm";
 require('dotenv').config();
 
 class App extends Component {
-    
+
     render() {
         return (
             <div className="Site">

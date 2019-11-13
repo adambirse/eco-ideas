@@ -1,0 +1,21 @@
+$nav_hover:  #D9C5E1;
+
+.nav {
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+
+}
+
+/* Style the nav links */
+.nav a {
+  display:block;
+  width: 60px;
+
+}
+
+/* Change color on hover */
+.nav a:hover {
+  background-color:$nav_hover;
+  color:black;
+}

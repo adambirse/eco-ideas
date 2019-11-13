@@ -1,0 +1,72 @@
+@import './variables.scss';
+@import 'modules/Alert.module';
+@import 'modules/Nav.module';
+@import 'modules/Form.module';
+@import 'modules/Header.module';
+@import 'modules/Footer.module';
+@import 'modules/Card.module';
+
+body {
+  background-color: $background;
+}
+
+.Site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: "Times New Roman", Times, serif;
+  padding: 10px;
+
+}
+
+.HolyGrail,
+.HolyGrail-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.HolyGrail-nav {
+  order: -1;
+}
+
+@media (min-width: 768px) {
+  .HolyGrail-body {
+    flex-direction: row;
+    flex: 1;
+  }
+
+  .HolyGrail-content {
+    flex: 1;
+    padding: 15px;
+
+  }
+
+  .HolyGrail-ads {
+    /* 15em is the width of the columns */
+    flex: 0 0 15em;
+
+  }
+
+  .HolyGrail-nav {
+    /* 6em is the width of the columns */
+    flex: 0 0 6em;
+
+  }
+}
+
+.third-width {
+  width: 33%;
+  margin: 8px 8px;
+
+}
+
+.tenth-width {
+  width: 10%;
+  margin: 8px 8px;
+
+}
+
+
+.active, .accordion:hover {
+  background-color: #ccc;
+}
