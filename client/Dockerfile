@@ -10,8 +10,7 @@ ENV REACT_APP_ENV=production
 RUN npm run build
 
 
-FROM node:12-alpine
-RUN npm install -g serve
-WORKDIR /app
-COPY --from=builder /app/build .
-CMD ["serve", "-p", "80", "-s", "."]
+FROM nginx:1.17.3-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
