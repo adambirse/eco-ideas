@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/server.js",
   "scripts": {
-    "pretest": "eslint --fix --ignore-path ../.gitignore .",
+    "pretest": "eslint --fix --ignore-path .eslintignore .",
     "test": "nyc --check-coverage --lines 80 --reporter=text mocha ./tests --recursive --require @babel/register",
     "start": "nodemon --exec babel-node src/server.js",
     "start-prod": "node build/server.js",
