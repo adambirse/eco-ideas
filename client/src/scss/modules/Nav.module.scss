@@ -1,21 +1,18 @@
-$nav_hover:  #D9C5E1;
+$nav_hover: $three;
 
 .nav {
-  list-style-type:none;
+  list-style-type: none;
   margin: 0;
   padding: 0;
 
+  a {
+    display: block;
+    width: 60px;
+  }
+
+  a:hover {
+    background-color: $nav_hover;
+    color: black;
+  }
 }
 
-/* Style the nav links */
-.nav a {
-  display:block;
-  width: 60px;
-
-}
-
-/* Change color on hover */
-.nav a:hover {
-  background-color:$nav_hover;
-  color:black;
-}

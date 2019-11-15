@@ -1,8 +1,12 @@
 $red: #f44336;
 
-.alert {
+%message-shared {
   padding: 1px;
-  background-color: $red;
   color:white;
   margin-bottom: 10px;
+}
+
+.alert {
+  @extend %message-shared;
+  background-color: $red;
 }

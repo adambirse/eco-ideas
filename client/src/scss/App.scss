@@ -5,9 +5,10 @@
 @import 'modules/Header.module';
 @import 'modules/Footer.module';
 @import 'modules/Card.module';
+@import 'modules/Filter.module';
 
 body {
-  background-color: $background;
+  background-color: $one;
 }
 
 .Site {
@@ -54,17 +55,7 @@ body {
   }
 }
 
-.third-width {
-  width: 33%;
-  margin: 8px 8px;
 
-}
-
-.tenth-width {
-  width: 10%;
-  margin: 8px 8px;
-
-}
 
 
 .active, .accordion:hover {
