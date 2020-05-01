@@ -8,7 +8,9 @@
     "test": "nyc --check-coverage --lines 80 --reporter=text mocha ./tests --recursive --require @babel/register",
     "start": "nodemon --exec babel-node src/server.js",
     "start-prod": "node build/server.js",
-    "build-prod": "babel src -d build"
+    "build-prod": "babel src -d build",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -24,7 +26,8 @@
     "morgan": "^1.9.1",
     "mysql2": "^1.6.5",
     "sequelize": "^5.17.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "snyk": "^*"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -41,5 +44,6 @@
     "sequelize-test-helpers": "^1.1.2",
     "sinon": "^7.4.1",
     "sinon-chai": "^3.3.0"
-  }
+  },
+  "snyk": true
 }
